@@ -2,7 +2,8 @@ Claro. He actualizado el README para que sea más conciso. He eliminado la secci
 
 💻 ClaudERP: Sistema de Gestión Empresarial y POS
 
-![file](https://github.com/user-attachments/assets/27fbed70-6b90-460b-ae67-81dff2c5cbbd)
+
+<img width="717" height="291" alt="logoPos" src="https://github.com/user-attachments/assets/f256e6c6-ba1d-4c34-bb57-dd9c551df4ce" />
 
 
 ClaudERP es un sistema de gestión empresarial (ERP) y punto de venta (POS) diseñado a medida para optimizar las operaciones de ClauPOS. Este proyecto surge como una solución a los desafíos que enfrentan los pequeños y medianos comercios, especialmente aquellos que aún utilizan cajas registradoras tradicionales y necesitan adaptarse a las nuevas normativas fiscales de la DIAN.
