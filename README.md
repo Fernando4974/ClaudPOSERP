@@ -1,6 +1,6 @@
-Claro. He actualizado el README para que sea más conciso. He eliminado la sección de pruebas y he integrado la explicación de los comandos de inicio en una nueva sección.
 
-💻 ClaudERP: Sistema de Gestión Empresarial y POS
+
+# 💻 ClaudERP: Sistema de Gestión Empresarial y POS
 
 
 <img width="717" height="291" alt="logoPos" src="https://github.com/user-attachments/assets/f256e6c6-ba1d-4c34-bb57-dd9c551df4ce" />
