@@ -14,7 +14,7 @@ export const Product = sequelize.define(
                 allowNull:false,
                 unique:true,
             },
-            description:{
+            descriptionProduct:{
                 type:DataTypes.STRING(500),
                 allowNull:true,
             },
@@ -22,7 +22,7 @@ export const Product = sequelize.define(
                 type:DataTypes.STRING(100),
                 unique:false,
             },
-            status:{
+            statusProduct:{
                 type:DataTypes.STRING(50),
                 allowNull:true
             }

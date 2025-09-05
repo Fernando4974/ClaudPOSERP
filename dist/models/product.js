@@ -18,7 +18,7 @@ exports.Product = connection_1.default.define('Product', {
         allowNull: false,
         unique: true,
     },
-    description: {
+    descriptionProduct: {
         type: sequelize_1.default.STRING(500),
         allowNull: true,
     },
@@ -26,7 +26,7 @@ exports.Product = connection_1.default.define('Product', {
         type: sequelize_1.default.STRING(100),
         unique: false,
     },
-    status: {
+    statusProduct: {
         type: sequelize_1.default.STRING(50),
         allowNull: true
     }
