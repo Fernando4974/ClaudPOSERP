@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const connection_js_1 = __importDefault(require("../database/connection.js"));
 const user_1 = require("./user");
 const routesUser_js_1 = require("../routes/routesUser.js");
+const product_js_1 = require("./product.js");
 class Server {
     app;
     port;
@@ -33,7 +34,8 @@ class Server {
     async DBconnection() {
         try {
             await connection_js_1.default.authenticate();
-            await user_1.User.sync({ alter: true });
+            await user_1.User.sync({ force: true });
+            await product_js_1.Product.sync({ force: true });
             console.log('Connection to the database has been established successfully!!.');
         }
         catch (error) {

@@ -63,7 +63,7 @@ const userLogin = async (req, res) => {
     }
     const token = jsonwebtoken_1.default.sign({
         emailUser
-    }, process.env.SECRET_KEY || "890sfd798s56423jk");
+    }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "1h" });
     res.json({
         msg: `Welcome ${userExist.userName}`,
         body: token

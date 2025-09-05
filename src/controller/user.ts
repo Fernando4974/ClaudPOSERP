@@ -14,7 +14,7 @@ export const userRegister = async(req:Request,res:Response)=>{
             msg:`The email ${emailUser} is already exsist`
         })
     }
-    if (credentialsUser==="" || credentialsUser=== null) {
+    if (credentialsUser==="" || credentialsUser === null) {
         
         return res.json({
             msg: `crentails is empty or null`
@@ -77,7 +77,7 @@ export const userLogin = async(req:Request,res:Response)=>{
 
     const token= jwt.sign({
         emailUser
-    },process.env.SECRET_KEY||"890sfd798s56423jk")
+    },process.env.SECRET_KEY||"890sfd798s56423jk",{expiresIn:"1h"})
 
     res.json({
         msg:`Welcome ${userExist.userName}`,
