@@ -8,4 +8,3 @@ const sequelize = new sequelize_1.Sequelize('api_nodejs', 'root', 'admin', {
     //   logging: false, // Disable logging for cleaner output
 });
 exports.default = sequelize;
-//# sourceMappingURL=connection.js.map
