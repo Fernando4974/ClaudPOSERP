@@ -5,7 +5,7 @@ import type { Request,Response } from "express";
  export const registerProduct = async( req:Request,res:Response )=>{
 
 
-    const {nameProduct,descriptionProduct,barcode,statusProduct}=req.body;
+    const {nameProduct,descriptionProduct,priceProduct,barcode,statusProduct}=req.body;
     const nameProductAlreadyExist= await Product.findOne({where:{nameProduct:nameProduct}});
 
     if (nameProductAlreadyExist) {
@@ -17,6 +17,7 @@ import type { Request,Response } from "express";
         await Product.create({
             nameProduct:nameProduct,
             descriptionProduct:descriptionProduct,
+            priceProduct:priceProduct,
             barcode:barcode,
             statusProduct:statusProduct,
 

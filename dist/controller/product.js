@@ -4,7 +4,7 @@ exports.getAllProducts = exports.registerProduct = void 0;
 const sequelize_1 = require("sequelize");
 const product_1 = require("../models/product");
 const registerProduct = async (req, res) => {
-    const { nameProduct, descriptionProduct, barcode, statusProduct } = req.body;
+    const { nameProduct, descriptionProduct, priceProduct, barcode, statusProduct } = req.body;
     const nameProductAlreadyExist = await product_1.Product.findOne({ where: { nameProduct: nameProduct } });
     if (nameProductAlreadyExist) {
         return res.json(`The product ${nameProduct} is already exist`);
@@ -13,6 +13,7 @@ const registerProduct = async (req, res) => {
         await product_1.Product.create({
             nameProduct: nameProduct,
             descriptionProduct: descriptionProduct,
+            priceProduct: priceProduct,
             barcode: barcode,
             statusProduct: statusProduct,
         });

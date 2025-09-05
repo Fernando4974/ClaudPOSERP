@@ -2,6 +2,7 @@ import express,{Application} from 'express';
 import sequelize from '../database/connection.js';
 import { User } from './user';
 import { routerRegisterUser,routerLoginUser } from '../routes/routesUser.js';
+import { routerRegisterProduct,routerGetAllProducts } from '../routes/routesProduct.js';
 import { Product } from './product.js';
 
 
@@ -32,6 +33,8 @@ class Server{
     Router(){
         this.app.use(routerRegisterUser);
         this.app.use(routerLoginUser);
+        this.app.use(routerRegisterProduct);
+        this.app.use(routerGetAllProducts);
     }
 
     
@@ -39,8 +42,8 @@ class Server{
      
         try {
             await sequelize.authenticate();
-            await User.sync({force:true});
-            await Product.sync({force:true})
+            await User.sync({force:false});
+            await Product.sync({force:false})
             console.log('Connection to the database has been established successfully!!.');
         } catch (error) {
             console.error('Unable to connect to the database:', error);

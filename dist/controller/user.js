@@ -65,7 +65,7 @@ const userLogin = async (req, res) => {
         emailUser
     }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "1h" });
     res.json({
-        msg: `Welcome ${userExist.userName}`,
+        msg: `Welcome ${userExist.nameUser}`,
         body: token
     });
 };

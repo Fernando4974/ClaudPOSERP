@@ -18,6 +18,10 @@ exports.Product = connection_1.default.define('Product', {
         allowNull: false,
         unique: true,
     },
+    priceProduct: {
+        type: sequelize_1.default.DOUBLE,
+        allowNull: false
+    },
     descriptionProduct: {
         type: sequelize_1.default.STRING(500),
         allowNull: true,

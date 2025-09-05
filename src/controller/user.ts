@@ -80,7 +80,7 @@ export const userLogin = async(req:Request,res:Response)=>{
     },process.env.SECRET_KEY||"890sfd798s56423jk",{expiresIn:"1h"})
 
     res.json({
-        msg:`Welcome ${userExist.userName}`,
+        msg:`Welcome ${userExist.nameUser}`,
         body:token
     })
 }
