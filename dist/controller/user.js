@@ -3,10 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userRegiter = void 0;
+exports.userLogin = exports.userRegister = void 0;
 const user_1 = require("../models/user");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const userRegiter = async (req, res) => {
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const userRegister = async (req, res) => {
     const { nameUser, lastNameUser, emailUser, passwordUser, credentialsUser } = req.body;
     const emailExist = await user_1.User.findOne({ where: { emailUser: emailUser } });
     if (emailExist) {
@@ -14,10 +15,15 @@ const userRegiter = async (req, res) => {
             msg: `The email ${emailUser} is already exsist`
         });
     }
+    if (credentialsUser === "" || credentialsUser === null) {
+        return res.json({
+            msg: `crentails is empty or null`
+        });
+    }
     const credentialsExist = await user_1.User.findOne({ where: { credentialsUser: credentialsUser } });
     if (credentialsExist) {
         return res.json({
-            msg: `The credentials ${credentialsExist} is already exist`
+            msg: `The credentials ${credentialsUser} is already exist`
         });
     }
     try {
@@ -30,7 +36,7 @@ const userRegiter = async (req, res) => {
             credentialsUser: credentialsUser,
         });
         res.status(200).json({
-            msg: `The user ${name} has been created`
+            msg: `The user ${nameUser} has been created`
         });
     }
     catch (error) {
@@ -40,4 +46,27 @@ const userRegiter = async (req, res) => {
         });
     }
 };
-exports.userRegiter = userRegiter;
+exports.userRegister = userRegister;
+const userLogin = async (req, res) => {
+    const { emailUser, passwordUser } = req.body;
+    const userExist = await user_1.User.findOne({ where: { emailUser: emailUser } });
+    const passwordValid = await bcrypt_1.default.compare(passwordUser, userExist.passwordUser);
+    if (!userExist) {
+        return res.json({
+            msg: `The email ${emailUser} do not exist`
+        });
+    }
+    if (!passwordValid) {
+        return res.json({
+            msg: `Incorrect password`
+        });
+    }
+    const token = jsonwebtoken_1.default.sign({
+        emailUser
+    }, process.env.SECRET_KEY || "890sfd798s56423jk");
+    res.json({
+        msg: `Welcome ${userExist.userName}`,
+        body: token
+    });
+};
+exports.userLogin = userLogin;
