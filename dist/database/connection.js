@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const sequelize = new sequelize_1.Sequelize(process.env.DB_NAME || 'api_nodejs', process.env.DB_USER || 'root', process.env.DB_PASSWORD || 'admin', {
     dialect: 'mysql',
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'localhost'
     //logging: false, // Disable logging for cleaner output
 });
 exports.default = sequelize;
