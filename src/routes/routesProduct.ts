@@ -1,6 +1,6 @@
 import { registerProduct,getAllProducts } from "../controller/product";
 import { Router } from "express";
-import { validateToken } from "./validateToken";
+import { validateToken } from "../controller/validateToken";
 
 export const routerRegisterProduct = Router();
 routerRegisterProduct.post("/api/product/register",registerProduct);

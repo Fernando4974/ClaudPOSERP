@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.routerGetAllProducts = exports.routerRegisterProduct = void 0;
 const product_1 = require("../controller/product");
 const express_1 = require("express");
-const validateToken_1 = require("./validateToken");
+const validateToken_1 = require("../controller/validateToken");
 exports.routerRegisterProduct = (0, express_1.Router)();
 exports.routerRegisterProduct.post("/api/product/register", product_1.registerProduct);
 exports.routerGetAllProducts = (0, express_1.Router)();

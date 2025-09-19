@@ -2,7 +2,7 @@ import sequelize from "../database/connection";
 import  DataTypes  from "sequelize";
 
 export const Product = sequelize.define(
-    'Product',{
+    'Products',{
             idProduct:{
                 type: DataTypes.INTEGER,
                 primaryKey:true,

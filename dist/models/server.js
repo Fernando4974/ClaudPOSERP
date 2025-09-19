@@ -6,9 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const connection_js_1 = __importDefault(require("../database/connection.js"));
 const user_1 = require("./user");
-const routesUser_js_1 = require("../routes/routesUser.js");
+const routesUserAuth_js_1 = require("../routes/routesUserAuth.js");
 const routesProduct_js_1 = require("../routes/routesProduct.js");
 const product_js_1 = require("./product.js");
+const cors_1 = __importDefault(require("cors"));
 class Server {
     app;
     port;
@@ -27,12 +28,14 @@ class Server {
     }
     Middleware() {
         this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)());
     }
     Router() {
-        this.app.use(routesUser_js_1.routerRegisterUser);
-        this.app.use(routesUser_js_1.routerLoginUser);
+        this.app.use(routesUserAuth_js_1.routerRegisterUser);
+        this.app.use(routesUserAuth_js_1.routerLoginUser);
         this.app.use(routesProduct_js_1.routerRegisterProduct);
         this.app.use(routesProduct_js_1.routerGetAllProducts);
+        this.app.use(routesUserAuth_js_1.authPassword);
     }
     async DBconnection() {
         try {

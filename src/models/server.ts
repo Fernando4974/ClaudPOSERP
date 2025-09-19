@@ -1,9 +1,10 @@
 import express,{Application} from 'express';
 import sequelize from '../database/connection.js';
 import { User } from './user';
-import { routerRegisterUser,routerLoginUser } from '../routes/routesUser.js';
+import { routerRegisterUser,routerLoginUser, authPassword } from '../routes/routesUserAuth.js';
 import { routerRegisterProduct,routerGetAllProducts } from '../routes/routesProduct.js';
 import { Product } from './product.js';
+import cors from 'cors'
 
 
 class Server{
@@ -29,12 +30,14 @@ class Server{
     }
     Middleware(){
         this.app.use(express.json())
+        this.app.use(cors())
     }
     Router(){
         this.app.use(routerRegisterUser);
         this.app.use(routerLoginUser);
         this.app.use(routerRegisterProduct);
         this.app.use(routerGetAllProducts);
+        this.app.use(authPassword)
     }
 
     

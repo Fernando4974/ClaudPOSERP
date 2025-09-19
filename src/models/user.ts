@@ -6,36 +6,36 @@ export const User = sequelize.define(
                                                 ///Tabla Usuarios
     'Users',{
 
-    idUser:{
+    id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true,
         allowNull:false,
     },
-    nameUser:{
+    name:{
         type:DataTypes.STRING(100),
         allowNull:false,
         unique:false,
     },
-    lastNameUser:{
+    lastname:{
         type:DataTypes.STRING(150),
         allowNull:false,
     },
-    emailUser:{
+    email:{
         type:DataTypes.STRING(180),
         allowNull:false,
         unique:true, 
     },
-    passwordUser:{
+    password:{
         type:DataTypes.STRING(200),
         allowNull:false,
     },
-    credentialsUser:{
+    credentials:{
         type:DataTypes.INTEGER,
         allowNull:true,
         unique:true,
     },
-    statusUser:{
+    status:{
         type:DataTypes.STRING(50),
         allowNull:true,
     }
