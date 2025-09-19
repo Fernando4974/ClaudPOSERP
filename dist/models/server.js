@@ -4,17 +4,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const connection_1 = __importDefault(require("../database/connection"));
+const connection_js_1 = __importDefault(require("../database/connection.js"));
 const user_1 = require("./user");
-const routesUser_1 = require("../routes/routesUser");
+const routesUserAuth_js_1 = require("../routes/routesUserAuth.js");
+const routesProduct_js_1 = require("../routes/routesProduct.js");
+const product_js_1 = require("./product.js");
+const cors_1 = __importDefault(require("cors"));
 class Server {
     app;
     port;
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3000';
-        this.listen();
         this.DBconnection();
+        this.Middleware();
+        this.Router();
+        this.listen();
     }
     listen() {
         this.app.listen(this.port, () => {
@@ -23,14 +28,20 @@ class Server {
     }
     Middleware() {
         this.app.use(express_1.default.json());
+        this.app.use((0, cors_1.default)());
     }
     Router() {
-        this.app.use(routesUser_1.routerRegisterUser);
+        this.app.use(routesUserAuth_js_1.routerRegisterUser);
+        this.app.use(routesUserAuth_js_1.routerLoginUser);
+        this.app.use(routesProduct_js_1.routerRegisterProduct);
+        this.app.use(routesProduct_js_1.routerGetAllProducts);
+        this.app.use(routesUserAuth_js_1.authPassword);
     }
     async DBconnection() {
         try {
-            await connection_1.default.authenticate();
-            await user_1.User.sync({ force: true });
+            await connection_js_1.default.authenticate();
+            await user_1.User.sync({ force: false });
+            await product_js_1.Product.sync({ force: false });
             console.log('Connection to the database has been established successfully!!.');
         }
         catch (error) {
@@ -39,7 +50,7 @@ class Server {
     }
     async DBconnection_test() {
         try {
-            await connection_1.default.authenticate();
+            await connection_js_1.default.authenticate();
             console.log('Connection to the database has been established successfully!!.');
         }
         catch (error) {

@@ -1,7 +1,10 @@
 import express,{Application} from 'express';
-import sequelize from '../database/connection';
+import sequelize from '../database/connection.js';
 import { User } from './user';
-import { routerRegisterUser } from '../routes/routesUser';
+import { routerRegisterUser,routerLoginUser, authPassword } from '../routes/routesUserAuth.js';
+import { routerRegisterProduct,routerGetAllProducts } from '../routes/routesProduct.js';
+import { Product } from './product.js';
+import cors from 'cors'
 
 
 class Server{
@@ -13,9 +16,10 @@ class Server{
     
         this.app = express();
         this.port = process.env.PORT || '3000';
-        this.listen();
         this.DBconnection();
-
+        this.Middleware();
+        this.Router();
+        this.listen();
     }
 
     listen() {
@@ -26,9 +30,14 @@ class Server{
     }
     Middleware(){
         this.app.use(express.json())
+        this.app.use(cors())
     }
     Router(){
         this.app.use(routerRegisterUser);
+        this.app.use(routerLoginUser);
+        this.app.use(routerRegisterProduct);
+        this.app.use(routerGetAllProducts);
+        this.app.use(authPassword)
     }
 
     
@@ -36,7 +45,8 @@ class Server{
      
         try {
             await sequelize.authenticate();
-            await User.sync({force:true})
+            await User.sync({force:false});
+            await Product.sync({force:false})
             console.log('Connection to the database has been established successfully!!.');
         } catch (error) {
             console.error('Unable to connect to the database:', error);

@@ -9,36 +9,36 @@ const connection_1 = __importDefault(require("../database/connection"));
 exports.User = connection_1.default.define(
 ///Tabla Usuarios
 'Users', {
-    idUser: {
+    id: {
         type: sequelize_1.default.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
     },
-    nameUser: {
+    name: {
         type: sequelize_1.default.STRING(100),
         allowNull: false,
         unique: false,
     },
-    lastNameUser: {
+    lastname: {
         type: sequelize_1.default.STRING(150),
         allowNull: false,
     },
-    emailUser: {
+    email: {
         type: sequelize_1.default.STRING(180),
         allowNull: false,
         unique: true,
     },
-    passwordUser: {
+    password: {
         type: sequelize_1.default.STRING(200),
         allowNull: false,
     },
-    credentialsUser: {
+    credentials: {
         type: sequelize_1.default.INTEGER,
         allowNull: true,
         unique: true,
     },
-    statusUser: {
+    status: {
         type: sequelize_1.default.STRING(50),
         allowNull: true,
     }
