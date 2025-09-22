@@ -33,11 +33,11 @@ exports.User = connection_1.default.define(
         type: sequelize_1.default.STRING(200),
         allowNull: false,
     },
-    credentials: {
-        type: sequelize_1.default.INTEGER,
-        allowNull: true,
-        unique: true,
-    },
+    // credentials:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:true,
+    //     unique:true,
+    // },
     status: {
         type: sequelize_1.default.STRING(50),
         allowNull: true,

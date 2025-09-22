@@ -6,7 +6,7 @@ import nodemailer from 'nodemailer'
 
 export const userRegister = async (req: Request, res: Response) => {
 
-    const { name, lastname, email, password, credentials } = req.body;
+    const { name, lastname, email, password } = req.body;
     const emailExist: any = await User.findOne({ where: { email: email } })
 
     if (emailExist) {
@@ -15,22 +15,22 @@ export const userRegister = async (req: Request, res: Response) => {
             msg: `The email ${email} is already exsist`
         })
     }
-    if (credentials === "" || credentials === null) {
+    // if (credentials === "" || credentials === null) {
 
-        return res.json({
-            msg: `crentails is empty or null`
-        })
-    }
+    //     return res.status(400).json({
+    //         msg: `crentails is empty or null`
+    //     })
+    // }
 
-    const credentialsExist = await User.findOne({ where: { credentials: credentials } });
+    // const credentialsExist = await User.findOne({ where: { credentials: credentials } });
 
-    if (credentialsExist) {
+    // if (credentialsExist) {
 
-        return res.json({
-            msg: `The credentials ${credentials} is already exist`
-        })
+    //     return res.json({
+    //         msg: `The credentials ${credentials} is already exist`
+    //     })
 
-    }
+    // }
     try {
 
 
@@ -41,7 +41,7 @@ export const userRegister = async (req: Request, res: Response) => {
             lastname: lastname,
             email: email,
             password: passwordUserHash,
-            credentials: credentials,
+         // credentials: credentials,
             status:1
         })
         res.status(200).json({
@@ -49,7 +49,7 @@ export const userRegister = async (req: Request, res: Response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             msg: `The user ${name} has't been creates for error: ${error}`,
             body: req.body
         })
@@ -63,16 +63,19 @@ export const userLogin = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     const userExist: any = await User.findOne({ where: { email: email } });
-    const passwordValid = await bcrypt.compare(password, userExist.password);
+    
     if (!userExist) {
 
-        return res.json({
-            msg: `The email ${email} do not exist`
+        return res.status(404).json({
+
+            msg: `The email ${email} do not exist`,
+            body:'usuario no existe'
         })
     }
+    const passwordValid = await bcrypt.compare(password, userExist.password);
     if (!passwordValid) {
 
-        return res.json({
+        return res.status(401).json({
             msg: `Incorrect password`
         })
     }

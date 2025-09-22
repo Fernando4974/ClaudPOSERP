@@ -9,24 +9,24 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const userRegister = async (req, res) => {
-    const { name, lastname, email, password, credentials } = req.body;
+    const { name, lastname, email, password } = req.body;
     const emailExist = await user_1.User.findOne({ where: { email: email } });
     if (emailExist) {
         return res.json({
             msg: `The email ${email} is already exsist`
         });
     }
-    if (credentials === "" || credentials === null) {
-        return res.json({
-            msg: `crentails is empty or null`
-        });
-    }
-    const credentialsExist = await user_1.User.findOne({ where: { credentials: credentials } });
-    if (credentialsExist) {
-        return res.json({
-            msg: `The credentials ${credentials} is already exist`
-        });
-    }
+    // if (credentials === "" || credentials === null) {
+    //     return res.status(400).json({
+    //         msg: `crentails is empty or null`
+    //     })
+    // }
+    // const credentialsExist = await User.findOne({ where: { credentials: credentials } });
+    // if (credentialsExist) {
+    //     return res.json({
+    //         msg: `The credentials ${credentials} is already exist`
+    //     })
+    // }
     try {
         const passwordUserHash = await bcrypt_1.default.hash(password, 10);
         await user_1.User.create({
@@ -34,7 +34,7 @@ const userRegister = async (req, res) => {
             lastname: lastname,
             email: email,
             password: passwordUserHash,
-            credentials: credentials,
+            // credentials: credentials,
             status: 1
         });
         res.status(200).json({
@@ -42,7 +42,7 @@ const userRegister = async (req, res) => {
         });
     }
     catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             msg: `The user ${name} has't been creates for error: ${error}`,
             body: req.body
         });
@@ -52,14 +52,15 @@ exports.userRegister = userRegister;
 const userLogin = async (req, res) => {
     const { email, password } = req.body;
     const userExist = await user_1.User.findOne({ where: { email: email } });
-    const passwordValid = await bcrypt_1.default.compare(password, userExist.password);
     if (!userExist) {
-        return res.json({
-            msg: `The email ${email} do not exist`
+        return res.status(404).json({
+            msg: `The email ${email} do not exist`,
+            body: 'usuario no existe'
         });
     }
+    const passwordValid = await bcrypt_1.default.compare(password, userExist.password);
     if (!passwordValid) {
-        return res.json({
+        return res.status(401).json({
             msg: `Incorrect password`
         });
     }
