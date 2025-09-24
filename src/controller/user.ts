@@ -9,12 +9,7 @@ export const userRegister = async (req: Request, res: Response) => {
     const { name, lastname, email, password } = req.body;
     const emailExist: any = await User.findOne({ where: { email: email } })
 
-    if (emailExist) {
 
-        return res.json({
-            msg: `The email ${email} is already exsist`
-        })
-    }
     // if (credentials === "" || credentials === null) {
 
     //     return res.status(400).json({
@@ -32,6 +27,13 @@ export const userRegister = async (req: Request, res: Response) => {
 
     // }
     try {
+            if (emailExist) {
+
+       res.status(409).json({
+            msg: `The email ${email} is already exsist`
+        })
+        return 
+    }
 
 
         const passwordUserHash = await bcrypt.hash(password, 10);
@@ -41,11 +43,13 @@ export const userRegister = async (req: Request, res: Response) => {
             lastname: lastname,
             email: email,
             password: passwordUserHash,
-         // credentials: credentials,
+         // credentials: credentials,n
             status:1
         })
-        res.status(200).json({
-            msg: `The user ${name} has been created`
+        res.status(201).json({
+            msg:{
+                userName:name
+            }
         })
 
     } catch (error) {
@@ -84,7 +88,7 @@ export const userLogin = async (req: Request, res: Response) => {
         email
     }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "1h" })
 
-    res.json({
+    return res.status(202).json({
         msg: `Welcome ${userExist.name}`,
         body: token
     })

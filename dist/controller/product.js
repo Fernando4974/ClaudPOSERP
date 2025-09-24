@@ -32,9 +32,7 @@ exports.registerProduct = registerProduct;
 const getAllProducts = async (req, res) => {
     try {
         const allProducts = await product_1.Product.findAll();
-        res.status(200).json({
-            body: allProducts
-        });
+        res.status(200).json(allProducts);
     }
     catch (error) {
         res.status(400), (0, sequelize_1.json)({

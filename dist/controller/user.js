@@ -11,11 +11,6 @@ const nodemailer_1 = __importDefault(require("nodemailer"));
 const userRegister = async (req, res) => {
     const { name, lastname, email, password } = req.body;
     const emailExist = await user_1.User.findOne({ where: { email: email } });
-    if (emailExist) {
-        return res.json({
-            msg: `The email ${email} is already exsist`
-        });
-    }
     // if (credentials === "" || credentials === null) {
     //     return res.status(400).json({
     //         msg: `crentails is empty or null`
@@ -28,17 +23,25 @@ const userRegister = async (req, res) => {
     //     })
     // }
     try {
+        if (emailExist) {
+            res.status(409).json({
+                msg: `The email ${email} is already exsist`
+            });
+            return;
+        }
         const passwordUserHash = await bcrypt_1.default.hash(password, 10);
         await user_1.User.create({
             name: name,
             lastname: lastname,
             email: email,
             password: passwordUserHash,
-            // credentials: credentials,
+            // credentials: credentials,n
             status: 1
         });
-        res.status(200).json({
-            msg: `The user ${name} has been created`
+        res.status(201).json({
+            msg: {
+                userName: name
+            }
         });
     }
     catch (error) {
@@ -67,7 +70,7 @@ const userLogin = async (req, res) => {
     const token = jsonwebtoken_1.default.sign({
         email
     }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "1h" });
-    res.json({
+    return res.status(202).json({
         msg: `Welcome ${userExist.name}`,
         body: token
     });
