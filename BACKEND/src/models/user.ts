@@ -30,11 +30,11 @@ export const User = sequelize.define(
         type:DataTypes.STRING(200),
         allowNull:false,
     },
-    credentials:{
-        type:DataTypes.INTEGER,
-        allowNull:true,
-        unique:true,
-    },
+    // credentials:{
+    //     type:DataTypes.INTEGER,
+    //     allowNull:true,
+    //     unique:true,
+    // },
     status:{
         type:DataTypes.STRING(50),
         allowNull:true,

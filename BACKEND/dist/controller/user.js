@@ -9,40 +9,43 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const userRegister = async (req, res) => {
-    const { name, lastname, email, password, credentials } = req.body;
+    const { name, lastname, email, password } = req.body;
     const emailExist = await user_1.User.findOne({ where: { email: email } });
-    if (emailExist) {
-        return res.json({
-            msg: `The email ${email} is already exsist`
-        });
-    }
-    if (credentials === "" || credentials === null) {
-        return res.json({
-            msg: `crentails is empty or null`
-        });
-    }
-    const credentialsExist = await user_1.User.findOne({ where: { credentials: credentials } });
-    if (credentialsExist) {
-        return res.json({
-            msg: `The credentials ${credentials} is already exist`
-        });
-    }
+    // if (credentials === "" || credentials === null) {
+    //     return res.status(400).json({
+    //         msg: `crentails is empty or null`
+    //     })
+    // }
+    // const credentialsExist = await User.findOne({ where: { credentials: credentials } });
+    // if (credentialsExist) {
+    //     return res.json({
+    //         msg: `The credentials ${credentials} is already exist`
+    //     })
+    // }
     try {
+        if (emailExist) {
+            res.status(409).json({
+                msg: `The email ${email} is already exsist`
+            });
+            return;
+        }
         const passwordUserHash = await bcrypt_1.default.hash(password, 10);
         await user_1.User.create({
             name: name,
             lastname: lastname,
             email: email,
             password: passwordUserHash,
-            credentials: credentials,
+            // credentials: credentials,n
             status: 1
         });
-        res.status(200).json({
-            msg: `The user ${name} has been created`
+        res.status(201).json({
+            msg: {
+                userName: name
+            }
         });
     }
     catch (error) {
-        res.status(500).json({
+        res.status(400).json({
             msg: `The user ${name} has't been creates for error: ${error}`,
             body: req.body
         });
@@ -52,21 +55,22 @@ exports.userRegister = userRegister;
 const userLogin = async (req, res) => {
     const { email, password } = req.body;
     const userExist = await user_1.User.findOne({ where: { email: email } });
-    const passwordValid = await bcrypt_1.default.compare(password, userExist.password);
     if (!userExist) {
-        return res.json({
-            msg: `The email ${email} do not exist`
+        return res.status(404).json({
+            msg: `The email ${email} do not exist`,
+            body: 'usuario no existe'
         });
     }
+    const passwordValid = await bcrypt_1.default.compare(password, userExist.password);
     if (!passwordValid) {
-        return res.json({
+        return res.status(401).json({
             msg: `Incorrect password`
         });
     }
     const token = jsonwebtoken_1.default.sign({
         email
     }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "1h" });
-    res.json({
+    return res.status(202).json({
         msg: `Welcome ${userExist.name}`,
         body: token
     });
@@ -82,7 +86,7 @@ const requestPasswordReset = async (req, res) => {
         const emailExist = await user_1.User.findOne({ where: { email: email } });
         if (!emailExist) {
             console.log("The email is not exist");
-            return res.json("The email is not exist");
+            return res.status(404).json("The email is not exist");
         }
         const transporter = nodemailer_1.default.createTransport({
             service: 'gmail',
@@ -95,11 +99,11 @@ const requestPasswordReset = async (req, res) => {
             from: process.env.TRANSPORTER_EMAIL || 'fjeni5889@gmail.com',
             to: email,
             subject: 'Click on the following URL to change your password',
-            html: `http://localhost:${process.env.PORT}/api/user/processResetPassword`
+            html: `http://localhost:${process.env.PORTBACKEND}/resetPassword?email=${email}&token=${jsonwebtoken_1.default.sign({ email }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "15m" })}`
         };
         await transporter.sendMail(mailOptions);
         console.log(` the email has been created: ${mailOptions}`);
-        return res.json({
+        return res.status(202).json({
             msg: `the email has been sended to: ${mailOptions.to}`,
             body: email
         });
@@ -127,18 +131,19 @@ const passwordReset = async (req, res) => {
             const oldPassword = await user.password;
             const verifyPassawords = await bcrypt_1.default.compare(password, oldPassword);
             if (verifyPassawords) {
-                return res.json({ msg: `The password can not be the same as previous one` });
+                //console.log(409+"nonono")
+                return res.status(409).json({ msg: `The password can not be the same as previous one` });
             }
         }
         catch (error) {
-            res.json({
+            res.status(409).json({
                 msg: `process find one uncompleted`,
                 body: "By: " + error
             });
         }
         const newPassword = await bcrypt_1.default.hash(password, 10);
-        await user_1.User.update({ password: newPassword }, { where: { email: email, } });
-        res.json({
+        await user_1.User.update({ password: newPassword }, { where: { email: email } });
+        res.status(202).json({
             msg: `password changed`,
         });
     }

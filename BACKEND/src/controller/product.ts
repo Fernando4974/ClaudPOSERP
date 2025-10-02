@@ -43,9 +43,9 @@ export const getAllProducts = async (req:Request,res:Response)=>{
     try {
 
        const allProducts = await Product.findAll()
-        res.status(200).json({
-            body:allProducts
-        })
+        res.status(200).json(
+        allProducts
+        )
 
     } catch (error) {
         res.status(400),json({
