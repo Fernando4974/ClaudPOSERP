@@ -86,7 +86,7 @@ const requestPasswordReset = async (req, res) => {
         const emailExist = await user_1.User.findOne({ where: { email: email } });
         if (!emailExist) {
             console.log("The email is not exist");
-            return res.json("The email is not exist");
+            return res.status(404).json("The email is not exist");
         }
         const transporter = nodemailer_1.default.createTransport({
             service: 'gmail',
@@ -99,11 +99,11 @@ const requestPasswordReset = async (req, res) => {
             from: process.env.TRANSPORTER_EMAIL || 'fjeni5889@gmail.com',
             to: email,
             subject: 'Click on the following URL to change your password',
-            html: `http://localhost:${process.env.PORT}/api/user/processResetPassword`
+            html: `http://localhost:${process.env.PORTBACKEND}/resetPassword?email=${email}&token=${jsonwebtoken_1.default.sign({ email }, process.env.SECRET_KEY || "890sfd798s56423jk", { expiresIn: "15m" })}`
         };
         await transporter.sendMail(mailOptions);
         console.log(` the email has been created: ${mailOptions}`);
-        return res.json({
+        return res.status(202).json({
             msg: `the email has been sended to: ${mailOptions.to}`,
             body: email
         });
@@ -131,18 +131,19 @@ const passwordReset = async (req, res) => {
             const oldPassword = await user.password;
             const verifyPassawords = await bcrypt_1.default.compare(password, oldPassword);
             if (verifyPassawords) {
-                return res.json({ msg: `The password can not be the same as previous one` });
+                //console.log(409+"nonono")
+                return res.status(409).json({ msg: `The password can not be the same as previous one` });
             }
         }
         catch (error) {
-            res.json({
+            res.status(409).json({
                 msg: `process find one uncompleted`,
                 body: "By: " + error
             });
         }
         const newPassword = await bcrypt_1.default.hash(password, 10);
-        await user_1.User.update({ password: newPassword }, { where: { email: email, } });
-        res.json({
+        await user_1.User.update({ password: newPassword }, { where: { email: email } });
+        res.status(202).json({
             msg: `password changed`,
         });
     }
