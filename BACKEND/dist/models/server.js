@@ -37,6 +37,7 @@ class Server {
         this.app.use(routesUserAuth_js_1.routerLoginUser);
         this.app.use(routesProduct_js_1.routerRegisterProduct);
         this.app.use(routesProduct_js_1.routerGetAllProducts);
+        this.app.use(routesProduct_js_1.routerGetOneProduct);
         this.app.use(routesUserAuth_js_1.authPassword);
         this.app.use(routesClients_js_1.routerClient);
     }

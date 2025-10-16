@@ -29,6 +29,10 @@ export const Product = sequelize.define(
             statusProduct:{
                 type:DataTypes.STRING(50),
                 allowNull:true
+            },
+            imgProduct:{
+                type:DataTypes.STRING(500),
+                allowNull:true
             }
     },{
             freezeTableName:true,
