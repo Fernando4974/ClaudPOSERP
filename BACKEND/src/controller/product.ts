@@ -1,4 +1,4 @@
-import { json } from "sequelize";
+import { json, Op } from "sequelize";
 import { Product } from "../models/product";
 import type { Request,Response } from "express";
 
@@ -52,6 +52,31 @@ export const getAllProducts = async (req:Request,res:Response)=>{
             msg:`The get can´t be completated by the error ${error}`
         })
     }
+
+
+}
+export const getOneProduct= async (req:Request,res:Response)=>{
+
+    const {idProduct,nameProduct,barcode}=req.body;
+
+    if(idProduct){
+        const productById= await Product.findOne({where:{idProduct:idProduct}});
+        return res.status(200).json(productById);
+    }
+    if(nameProduct){
+        const productByName= await Product.findAll(
+            {
+                where:{nameProduct:{[Op.like]:`%${nameProduct}%`}
+                    
+                }
+    });
+        return res.status(200).json(productByName);
+    }
+    if(nameProduct){
+        const productByBarcode= await Product.findOne({where:{barcode:{[Op.like]:`%${barcode}%`}}});
+        return res.status(200).json(productByBarcode);
+    }
+   
 
 
 }

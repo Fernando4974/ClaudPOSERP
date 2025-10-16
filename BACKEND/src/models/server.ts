@@ -1,8 +1,10 @@
 import express,{Application} from 'express';
 import sequelize from '../database/connection.js';
 import { User } from './user';
+import { Cliente } from './cliente.js';
 import { routerRegisterUser,routerLoginUser, authPassword } from '../routes/routesUserAuth.js';
-import { routerRegisterProduct,routerGetAllProducts } from '../routes/routesProduct.js';
+import { routerRegisterProduct,routerGetAllProducts,routerGetOneProduct } from '../routes/routesProduct.js';
+import { routerClient} from '../routes/routesClients.js';
 import { Product } from './product.js';
 import cors from 'cors'
 
@@ -37,7 +39,9 @@ class Server{
         this.app.use(routerLoginUser);
         this.app.use(routerRegisterProduct);
         this.app.use(routerGetAllProducts);
+        this.app.use(routerGetOneProduct);
         this.app.use(authPassword)
+        this.app.use(routerClient)
     }
 
     
@@ -47,6 +51,7 @@ class Server{
             await sequelize.authenticate();
             await User.sync({alter:false});
             await Product.sync({force:false})
+            await Cliente.sync({alter:false})
             console.log('Connection to the database has been established successfully!!.');
         } catch (error) {
             console.error('Unable to connect to the database:', error);

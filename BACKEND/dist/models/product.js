@@ -33,6 +33,10 @@ exports.Product = connection_1.default.define('Products', {
     statusProduct: {
         type: sequelize_1.default.STRING(50),
         allowNull: true
+    },
+    imgProduct: {
+        type: sequelize_1.default.STRING(500),
+        allowNull: true
     }
 }, {
     freezeTableName: true,

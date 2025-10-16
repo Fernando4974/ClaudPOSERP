@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllProducts = exports.registerProduct = void 0;
+exports.getOneProduct = exports.getAllProducts = exports.registerProduct = void 0;
 const sequelize_1 = require("sequelize");
 const product_1 = require("../models/product");
 const registerProduct = async (req, res) => {
@@ -41,3 +41,22 @@ const getAllProducts = async (req, res) => {
     }
 };
 exports.getAllProducts = getAllProducts;
+const getOneProduct = async (req, res) => {
+    const { idProduct, nameProduct, barcode } = req.body;
+    if (idProduct) {
+        const productById = await product_1.Product.findOne({ where: { idProduct: idProduct } });
+        return res.status(200).json(productById);
+    }
+    if (nameProduct) {
+        const productByName = await product_1.Product.findAll({
+            where: { nameProduct: { [sequelize_1.Op.like]: `%${nameProduct}%` }
+            }
+        });
+        return res.status(200).json(productByName);
+    }
+    if (nameProduct) {
+        const productByBarcode = await product_1.Product.findOne({ where: { barcode: { [sequelize_1.Op.like]: `%${barcode}%` } } });
+        return res.status(200).json(productByBarcode);
+    }
+};
+exports.getOneProduct = getOneProduct;
