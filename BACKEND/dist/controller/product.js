@@ -48,13 +48,20 @@ const getOneProduct = async (req, res) => {
         return res.status(200).json(productById);
     }
     if (nameProduct) {
-        const productByName = await product_1.Product.findAll({
-            where: { nameProduct: { [sequelize_1.Op.like]: `%${nameProduct}%` }
-            }
-        });
-        return res.status(200).json(productByName);
+        try {
+            const productByName = await product_1.Product.findAll({
+                where: { nameProduct: { [sequelize_1.Op.like]: `%${nameProduct}%` } }
+            });
+            return res.status(200).json(productByName);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(500).json({
+                msg: `The search can´t be completated by the error ${error}`
+            });
+        }
     }
-    if (nameProduct) {
+    if (barcode) {
         const productByBarcode = await product_1.Product.findOne({ where: { barcode: { [sequelize_1.Op.like]: `%${barcode}%` } } });
         return res.status(200).json(productByBarcode);
     }

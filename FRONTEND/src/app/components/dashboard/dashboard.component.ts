@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { ProductComponent } from './product/product.component';
-import { ProductService } from '../../services/product.service';
-
-import { Product } from '../../interfaces/product';
-
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, ProductComponent],
+  imports: [NavbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent  {
+export class DashboardComponent implements OnInit {
 
+  constructor(private router: Router) {
+
+  }
+  ngOnInit(): void {
+
+  }
+
+  productModule(){
+    this.router.navigate(["/products"]);
+  }
 
 }
+

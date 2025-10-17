@@ -50,7 +50,7 @@ class Server{
         try {
             await sequelize.authenticate();
             await User.sync({alter:false});
-            await Product.sync({force:false})
+            await Product.sync({alter:true})
             await Cliente.sync({alter:false})
             console.log('Connection to the database has been established successfully!!.');
         } catch (error) {

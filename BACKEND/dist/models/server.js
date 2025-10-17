@@ -45,7 +45,7 @@ class Server {
         try {
             await connection_js_1.default.authenticate();
             await user_1.User.sync({ alter: false });
-            await product_js_1.Product.sync({ force: false });
+            await product_js_1.Product.sync({ alter: true });
             await cliente_js_1.Cliente.sync({ alter: false });
             console.log('Connection to the database has been established successfully!!.');
         }

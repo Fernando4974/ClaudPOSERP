@@ -1,6 +1,7 @@
 import { json, Op } from "sequelize";
 import { Product } from "../models/product";
 import type { Request,Response } from "express";
+import { log } from "console";
 
  export const registerProduct = async( req:Request,res:Response )=>{
 
@@ -64,19 +65,28 @@ export const getOneProduct= async (req:Request,res:Response)=>{
         return res.status(200).json(productById);
     }
     if(nameProduct){
+        
+        try{
         const productByName= await Product.findAll(
             {
-                where:{nameProduct:{[Op.like]:`%${nameProduct}%`}
+                where:{nameProduct:{[Op.like]:`%${nameProduct}%`}}
                     
-                }
-    });
-        return res.status(200).json(productByName);
-    }
-    if(nameProduct){
+            })
+            return res.status(200).json(productByName);
+        }catch(error){
+            console.log(error);
+            
+            return res.status(500).json({
+                msg:`The search can´t be completated by the error ${error}`
+            })
+        }
+    }   
+    
+    if(barcode){
         const productByBarcode= await Product.findOne({where:{barcode:{[Op.like]:`%${barcode}%`}}});
         return res.status(200).json(productByBarcode);
     }
+}
    
 
 
-}
