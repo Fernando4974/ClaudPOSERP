@@ -8,7 +8,7 @@ import { tokenGuard } from './utils/token.guard';
 import { userExitGuard } from './guards/user-exit.guard';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ProductComponent } from './components/dashboard/product/product.component';
+import { ProductComponent } from './pages/product/product.component';
 
 export const routes: Routes = [
   {path:"",redirectTo:'/logIn', pathMatch:'full'},

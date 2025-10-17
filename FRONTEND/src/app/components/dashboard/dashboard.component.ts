@@ -18,8 +18,28 @@ export class DashboardComponent implements OnInit {
   }
 
   productModule(){
-    this.router.navigate(["/products"]);
+    this.router.navigate(["/product"]);
   }
+
+  posModule(){
+    this.router.navigate(["/maintenancePage"]);
+  }
+
+  clientModule(){
+    this.router.navigate(["/maintenancePage"]);
+  }
+
+  configModule(){
+    this.router.navigate(["/maintenancePage"]);
+  }
+
+  employedModule(){
+    this.router.navigate(["/maintenancePage"]);
+  }
+  countModule(){
+    this.router.navigate(["/maintenancePage"]);
+  }
+
 
 }
 
