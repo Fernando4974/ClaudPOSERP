@@ -11,14 +11,16 @@
 ClaudERP es un sistema de gestión empresarial (ERP) y punto de venta (POS) diseñado a medida para optimizar las operaciones de ClauPOS. Este proyecto surge como una solución a los desafíos que enfrentan los pequeños y medianos comercios, especialmente aquellos que aún utilizan cajas registradoras tradicionales y necesitan adaptarse a las nuevas normativas fiscales de la DIAN.
 
 Al replicar la interfaz de usuario de la caja registradora Casio SE-S800, nuestro sistema minimiza la curva de aprendizaje y permite una migración fluida de la gestión de ventas, inventario y reportes financieros a una plataforma digital unificada.
-<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/e82ef7dc-ae63-4575-b1c6-d988fbea2597" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/7f1f98ad-b242-4455-bfb9-7ae5570214a7" />
+
+
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/ac2e6b71-f4cd-480f-b719-3ab49bba9cbf" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/87141dd1-588a-4385-a966-63302d5c8b85" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/fa07fdc8-1326-4ef2-b37f-2b1a7a5b7d30" />
-<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/c7e85704-7d6e-40be-8c5d-69dd9013849a" />
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/e82ef7dc-ae63-4575-b1c6-d988fbea2597" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/1e333d54-db95-4ec4-b2dd-952aa7f7e98b" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/42f2caaf-043c-4776-b979-f275e58fd67c" />
+<img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/c7e85704-7d6e-40be-8c5d-69dd9013849a" />
 
 
 
