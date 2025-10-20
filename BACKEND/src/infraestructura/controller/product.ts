@@ -10,6 +10,8 @@ export const registerProduct = async (req: Request, res: Response) => {
     priceProduct,
     barcode,
     statusProduct,
+    posAvalible,
+    categorie
   } = req.body;
   const nameProductAlreadyExist = await Product.findOne({
     where: { nameProduct: nameProduct },
@@ -18,14 +20,19 @@ export const registerProduct = async (req: Request, res: Response) => {
   if (nameProductAlreadyExist) {
     return res.json(`The product ${nameProduct} is already exist`);
   }
+ 
+  const posAvalibleDefault:boolean=true;
 
   try {
+   
     await Product.create({
       nameProduct: nameProduct,
       descriptionProduct: descriptionProduct,
       priceProduct: priceProduct,
       barcode: barcode,
       statusProduct: statusProduct,
+      posAvalible:posAvalible,
+      categorie:categorie
     });
     res.status(200).json({
       msg: `The product ${nameProduct} has been created`,

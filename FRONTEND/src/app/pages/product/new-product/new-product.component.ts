@@ -15,6 +15,9 @@ export class NewProductComponent implements OnInit{
   namePoduct="";
   priceProdct="";
   descriptionProduct="";
+  barcode="";
+  
+
 
   // vamos aca creando las variables de el formulario new product
 

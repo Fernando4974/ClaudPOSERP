@@ -38,6 +38,14 @@ exports.Product = connection_1.default.define("Products", {
         type: sequelize_1.default.STRING(500),
         allowNull: true,
     },
+    posAvalible: {
+        type: sequelize_1.default.BOOLEAN,
+        allowNull: false,
+    },
+    categorie: {
+        type: sequelize_1.default.STRING(100),
+        allowNull: false
+    }
 }, {
     freezeTableName: true,
     paranoid: true,

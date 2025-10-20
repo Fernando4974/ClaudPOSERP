@@ -4,13 +4,14 @@ exports.getOneProduct = exports.getAllProducts = exports.registerProduct = void 
 const sequelize_1 = require("sequelize");
 const product_1 = require("../../dominio/models/product");
 const registerProduct = async (req, res) => {
-    const { nameProduct, descriptionProduct, priceProduct, barcode, statusProduct, } = req.body;
+    const { nameProduct, descriptionProduct, priceProduct, barcode, statusProduct, posAvalible, categorie } = req.body;
     const nameProductAlreadyExist = await product_1.Product.findOne({
         where: { nameProduct: nameProduct },
     });
     if (nameProductAlreadyExist) {
         return res.json(`The product ${nameProduct} is already exist`);
     }
+    const posAvalibleDefault = true;
     try {
         await product_1.Product.create({
             nameProduct: nameProduct,
@@ -18,6 +19,8 @@ const registerProduct = async (req, res) => {
             priceProduct: priceProduct,
             barcode: barcode,
             statusProduct: statusProduct,
+            posAvalible: posAvalible,
+            categorie: categorie
         });
         res.status(200).json({
             msg: `The product ${nameProduct} has been created`,

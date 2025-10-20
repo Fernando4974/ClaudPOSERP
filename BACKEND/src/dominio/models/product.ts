@@ -35,6 +35,14 @@ export const Product = sequelize.define(
       type: DataTypes.STRING(500),
       allowNull: true,
     },
+    posAvalible:{
+    type:DataTypes.BOOLEAN,
+    allowNull:false,   
+    },
+    categorie:{
+      type:DataTypes.STRING(100),
+      allowNull:false
+    }
   },
   {
     freezeTableName: true,
