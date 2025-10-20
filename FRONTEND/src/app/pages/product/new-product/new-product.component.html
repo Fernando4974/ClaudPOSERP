@@ -1,0 +1,148 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<app-navbar></app-navbar>
+
+
+
+
+
+<div class="wraper">
+<app-sidebar></app-sidebar>
+  <div class="body">
+  
+  <!-- <div action="" >
+<div class="mt-3 mb-3"><h2>Nuevo Producto</h2></div>
+  <p>Nombre</p>
+  <div class="form-floating mt-3 col">
+  <input type="text" class="form-control"   id="name" placeholder="" >
+
+  </div>
+  <div class="form-floating mt-3 col">
+  <input type="text" class="form-control"  id="lastname" placeholder="">
+  
+  </div>
+  </div>
+  <div class="form-floating mt-3">
+  <input type="email" class="form-control" id="email" placeholder="">
+ 
+
+
+<div class="form-floating mt-3 col">
+
+  <input type="password" class="form-control" id="password" placeholder="">
+ 
+  </div>
+  <div class="form-floating mt-3 col">
+  <input type="password" class="form-control" id="passwordConfirm"  placeholder="">
+  
+  </div>
+
+  <div class="d-grid gap-2 mt-3">
+    </div>
+  <button class="btn btn-primary"  type="button">Registrarme</button>
+
+
+
+
+<p class="mt-3"> Ya tengo cuenta <a href="/logIn">Ingresar</a></p> -->
+
+<!-- </div>
+
+  </div> -->
+  
+  <div class="product-form-container">
+   <h3 class="title">
+    Nuevo Producto
+   </h3>
+    <header class="form-header d-flex justify-content-between align-items-center mb-4">
+        <div class="title-section d-flex align-items-center">
+            <i class="fa fa-star-o text-muted me-3"></i>
+            <div class="input-group">
+                <input type="text" class="form-control form-control-lg form-control-plaintext product-name-input" 
+                       placeholder="Escribe el nombre del producto aqui">
+                      
+            </div>
+            
+        </div>
+        
+        <div class="image-upload-placeholder">
+            <i class="fa fa-camera-retro fa-3x text-muted"></i>
+        </div>
+    </header>
+
+    <div class="form-controls mb-4">
+       
+    
+        
+        <div class="d-flex gap-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkVendido" checked>
+                <label class="form-check-label" for="checkVendido">
+                    Disponible en punto de venta
+                </label>
+            </div>
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkComprar" checked>
+                <label class="form-check-label" for="checkComprar">
+                    Se puede comprar
+                </label>
+            </div> -->
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button">Información General</button>
+        </li>
+        <!-- <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ventas-tab" data-bs-toggle="tab" data-bs-target="#ventas" type="button">Ventas</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="compra-tab" data-bs-toggle="tab" data-bs-target="#compra" type="button">Compra</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="inventario-tab" data-bs-toggle="tab" data-bs-target="#inventario" type="button">Inventario</button>
+        </li> -->
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contabilidad-tab" data-bs-toggle="tab" data-bs-target="#contabilidad" type="button">Contabilidad</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="general" role="tabpanel">
+            <div class="row">
+                <div class="col-md-6 form-section-left">
+                    <div class="form-group row mb-4 align-items-center">
+                        <label class="col-sm-4 col-form-label field-label">Categoria</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-plaintext field-value" value="">
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-md-6 form-section-left">
+                    <div class="form-group row mb-4 align-items-center">
+                        <label class="col-sm-4 col-form-label field-label">Descripcion</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control form-control-plaintext field-value" value="">
+                        </div>
+                    </div>
+                    </div>
+                <div class="col-md-6 form-section-right">
+                    <div class="form-group row mb-4 align-items-center">
+                        <label class="col-sm-4 col-form-label field-label">Precio de venta</label>
+                        <div class="col-sm-8 d-flex align-items-center">
+                             <span class="me-2">$</span>
+                            <input type="text" class="form-control form-control-plaintext field-value-price" value="1,00">
+                             <small class="ms-3 text-muted">(= $ 0,93 impuestos no incluidos)</small>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="alert">
+<p id="alertTexto" ></p>
+</div>
+

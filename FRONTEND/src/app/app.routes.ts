@@ -9,6 +9,7 @@ import { userExitGuard } from './guards/user-exit.guard';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProductComponent } from './pages/product/product.component';
+import { NewProductComponent } from './pages/product/new-product/new-product.component';
 
 export const routes: Routes = [
   {path:"",redirectTo:'/logIn', pathMatch:'full'},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path:"forgotPassword", component: ForgotPasswordComponent},
   {path:"resetPassword" ,component: ResetPasswordComponent},
   {path:'product',component:ProductComponent},
+  {path:'newProduct',component:NewProductComponent},
   {path:"dashboard",component : DashboardComponent, canActivate:[tokenGuard],canDeactivate:[userExitGuard]},
   {path:"errorPage",component : ErrorpageComponent},
   {path:"maintenancePage", component: MaintenanceComponent},

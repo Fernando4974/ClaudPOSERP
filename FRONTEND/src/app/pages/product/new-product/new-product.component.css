@@ -1,0 +1,112 @@
+.wraper{
+  display: flex;
+ 
+ 
+
+}
+.body{
+  padding: 1%;
+   max-width: 95%;
+   width: 95%;
+  
+}
+.title{
+  display: flex;
+  padding-left: 1%;
+}
+
+
+/* Estilos generales del formulario (simulando el área blanca) */
+.product-form-container {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo de la cabecera para el título grande */
+.product-name-input {
+    width: 700px;;
+    font-size: 2.5rem;
+    font-weight: 300;
+    border: none !important;
+    padding: 0 !important;
+    color: #888; /* Color gris suave */
+}
+
+.product-name-input:focus {
+    color: #333; /* Color oscuro al enfocar */
+}
+
+/* Estilo para el marcador de posición de la imagen */
+.image-upload-placeholder {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #fafafa;
+}
+
+/* Estilo de las pestañas */
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #666;
+    margin-right: 15px;
+    padding: 10px 0;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom-color: #007bff; /* Color azul para la pestaña activa */
+    color: #333;
+    font-weight: 500;
+}
+
+/* Estilo de las etiquetas (preguntas y campos de valor) */
+.field-label {
+    font-weight: 500; /* Hace la etiqueta más oscura */
+    color: #333;
+    cursor: help; /* Indica que hay una ayuda o tooltip (el icono de pregunta) */
+}
+
+.field-value {
+    /* Estilo del campo de texto (similar a un texto plano y editable) */
+    border: none;
+    border-bottom: 1px solid #ccc !important; 
+    padding: 5px 0;
+    background-color: transparent !important;
+}
+
+.field-value:focus {
+    border-bottom-color: #007bff !important;
+    box-shadow: none !important;
+}
+
+/* Estilo para el precio */
+.field-value-price {
+    width: 80px;
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid #ccc !important; 
+    padding: 5px 0;
+    background-color: transparent !important;
+}
+
+/* Estilo para el tag de impuesto (simulación) */
+.tax-tag {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.tax-tag .close-btn {
+    margin-left: 5px;
+    cursor: pointer;
+    color: #888;
+}

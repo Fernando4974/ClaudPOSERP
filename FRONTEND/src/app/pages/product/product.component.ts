@@ -6,6 +6,7 @@ import { OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +19,7 @@ export class ProductComponent implements OnInit {
 
   listProduct: Product[] = []
 
-constructor(private productService: ProductService) {
+constructor(private productService: ProductService, private router:Router) {
 
 }
 
@@ -39,5 +40,9 @@ ngOnInit(): void {
     })
 
   }
+  goToNewProduct(){
+    this.router.navigate(["/newProduct"])
+  }
+
 
 }

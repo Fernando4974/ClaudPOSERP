@@ -7,21 +7,38 @@
 <div class="container listProduct">
 <app-sidebar></app-sidebar>
 <div>
+  <div class="control-content">
+    <div class="new-button">
+      <button class="btn btn-secondary mt-3" (click)="goToNewProduct()">Nuevo</button>
+
+    </div>
+    <div class="input-group flex-nowrap mt-3">
+  <input type="text" class="form-control" placeholder="Buscar" aria-label="Username" aria-describedby="addon-wrapping">
+
+</div>
+
+
+  </div><div>
+
+</div>
+<hr>
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col"></th>
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Price</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of listProduct">
-      <th scope="row">{{item.idProduct}}</th>
+      <th scope="row"><input type="checkbox"> </th>
       <td>{{item.nameProduct}}</td>
       <td>{{item.descriptionProduct}}</td>
       <td>{{item.priceProduct}}</td>
+      <td><button class="btn btn-secondary" title="editar" ><img src="ajustes.png" alt="ico"></button></td>
     </tr>
       </tbody>
 </table>
