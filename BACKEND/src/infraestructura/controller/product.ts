@@ -18,10 +18,9 @@ export const registerProduct = async (req: Request, res: Response) => {
   });
 
   if (nameProductAlreadyExist) {
-    return res.json(`The product ${nameProduct} is already exist`);
+    return res.status(409).json(`The product ${nameProduct} is already exist`);
   }
  
-  const posAvalibleDefault:boolean=true;
 
   try {
    

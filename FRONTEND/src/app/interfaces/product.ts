@@ -13,3 +13,15 @@ export interface ProductFilter{
   barcode?:string,
   status?:string
 }
+export interface newProduct{
+
+  nameProduct:string,
+  descriptionProduct:string,
+  barcode:string,
+  statusProduct:string,
+  priceProduct:number,
+  imgProduct?:string,
+  posAvalible:boolean,
+  categorie:string
+
+}

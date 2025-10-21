@@ -1,18 +1,24 @@
 .wraper{
   display: flex;
- 
- 
+
+
 
 }
 .body{
   padding: 1%;
    max-width: 95%;
    width: 95%;
-  
+
 }
 .title{
   display: flex;
   padding-left: 1%;
+}
+#alertTexto{
+  color: red;
+}
+#alertTextOK{
+  color:green;
 }
 
 
@@ -74,7 +80,7 @@
 .field-value {
     /* Estilo del campo de texto (similar a un texto plano y editable) */
     border: none;
-    border-bottom: 1px solid #ccc !important; 
+    border-bottom: 1px solid #ccc !important;
     padding: 5px 0;
     background-color: transparent !important;
 }
@@ -89,7 +95,7 @@
     width: 80px;
     text-align: right;
     border: none;
-    border-bottom: 1px solid #ccc !important; 
+    border-bottom: 1px solid #ccc !important;
     padding: 5px 0;
     background-color: transparent !important;
 }

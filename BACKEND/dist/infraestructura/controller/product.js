@@ -9,9 +9,8 @@ const registerProduct = async (req, res) => {
         where: { nameProduct: nameProduct },
     });
     if (nameProductAlreadyExist) {
-        return res.json(`The product ${nameProduct} is already exist`);
+        return res.status(409).json(`The product ${nameProduct} is already exist`);
     }
-    const posAvalibleDefault = true;
     try {
         await product_1.Product.create({
             nameProduct: nameProduct,
