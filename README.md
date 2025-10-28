@@ -20,6 +20,7 @@ Al replicar la interfaz de usuario de la caja registradora Casio SE-S800, nuestr
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/e82ef7dc-ae63-4575-b1c6-d988fbea2597" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/1e333d54-db95-4ec4-b2dd-952aa7f7e98b" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/42f2caaf-043c-4776-b979-f275e58fd67c" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9b1daf9b-a4fb-4060-a040-06316c23d174" />
 <img width="1920" height="1030" alt="image" src="https://github.com/user-attachments/assets/c7e85704-7d6e-40be-8c5d-69dd9013849a" />
 
 
