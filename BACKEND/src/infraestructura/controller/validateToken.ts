@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config();
 
+
 export const validateToken = async (req:Request,res:Response, next:NextFunction)=>{
 
     const headerToken= req.headers['authorization'];
@@ -12,8 +13,9 @@ export const validateToken = async (req:Request,res:Response, next:NextFunction)
         try {
             
                 const onlyToken = headerToken.slice(7);
-                jwt.verify(onlyToken,process.env.SECRET_KEY||"564er87987956456fds564ds")
-
+                const decoded = jwt.verify(onlyToken,process.env.SECRET_KEY||"564er87987956456fds564ds")
+              
+                //falta el id del usuario que debe ir en el token
                 next();
 
 

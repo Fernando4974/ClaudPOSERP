@@ -54,6 +54,12 @@ export const userRegister = async (req: Request, res: Response) => {
     });
   }
 };
+
+// 
+// // 
+// LOGIN
+// 
+// 
 export const userLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -74,13 +80,15 @@ export const userLogin = async (req: Request, res: Response) => {
 
   const token = jwt.sign(
     {
-      email,
+      id:userExist.id,
+      email:userExist.email,
     },
     process.env.SECRET_KEY || "890sfd798s56423jk",
     { expiresIn: "1h" }
   );
 
   return res.status(202).json({
+  
     msg: `Welcome ${userExist.name}`,
     body: token,
   });

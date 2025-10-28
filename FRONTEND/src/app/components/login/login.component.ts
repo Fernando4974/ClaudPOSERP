@@ -8,13 +8,14 @@ import { UserLogin } from '../../interfaces/user';
 import { HttpResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { PosRegisterComponent } from '../../pages/pos/pos-register/pos-register.component';
 
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,NavbarComponent, FormsModule,SpinnerComponent],
+  imports: [CommonModule,NavbarComponent, FormsModule,SpinnerComponent,DashboardComponent,PosRegisterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 
@@ -53,6 +54,13 @@ export class LoginComponent  {
     if(this.password=="p"){
 
       this.router.navigate(["/product"])
+      return
+
+    }
+
+    if(this.password=="r"){
+
+      this.router.navigate(["/pos-register"])
       return
 
     }

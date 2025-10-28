@@ -10,6 +10,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProductComponent } from './pages/product/product.component';
 import { NewProductComponent } from './pages/product/new-product/new-product.component';
+import { PosRegisterComponent } from './pages/pos/pos-register/pos-register.component';
 
 export const routes: Routes = [
   {path:"",redirectTo:'/logIn', pathMatch:'full'},
@@ -22,5 +23,6 @@ export const routes: Routes = [
   {path:"dashboard",component : DashboardComponent, canActivate:[tokenGuard],canDeactivate:[userExitGuard]},
   {path:"errorPage",component : ErrorpageComponent},
   {path:"maintenancePage", component: MaintenanceComponent},
+  {path:"pos-register", component: PosRegisterComponent},
   {path:"**",redirectTo:"/errorPage",pathMatch:'full'},
 ];

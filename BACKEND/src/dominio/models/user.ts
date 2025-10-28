@@ -1,6 +1,7 @@
 import DataTypes from "sequelize";
 import sequelize from "../../dominio/database/connection.js";
 
+
 export const User = sequelize.define(
   ///Tabla Usuarios
   "Users",

@@ -15,7 +15,7 @@ export class UserService {
   private APIUrlLogin:string;
   private APIUrlReqReset:string;
   private APIUrlPasswordReset:string;
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     this.AppUrl=environment.apiUrl;
     this.APIUrlRegister='api/user/register'
     this.APIUrlLogin='api/user/login'
