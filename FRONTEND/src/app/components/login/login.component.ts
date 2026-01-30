@@ -8,24 +8,24 @@ import { UserLogin } from '../../interfaces/user';
 import { HttpResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
-import { PosRegisterComponent } from '../../pages/pos/pos-register/pos-register.component';
+import { PosRegisterComponent } from '../../pages/pos/pos-version/pos-register/pos-register.component';
 
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,NavbarComponent, FormsModule,SpinnerComponent,DashboardComponent,PosRegisterComponent],
+  imports: [CommonModule, NavbarComponent, FormsModule, SpinnerComponent, DashboardComponent, PosRegisterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 
 })
-export class LoginComponent  {
+export class LoginComponent {
 
   email: string = "";
   password: string = "";
   alertTexto: string = "";
-  loading:boolean=false;
+  loading: boolean = false;
 
   isDirty: boolean = false;
   constructor(private router: Router, private _userService: UserService) {
@@ -33,7 +33,7 @@ export class LoginComponent  {
   }
 
   ///metodos por implementar PARA EL CAN DEACTIVATE
-   hasUnsavedData(): boolean {
+  hasUnsavedData(): boolean {
 
     return this.isDirty;
   }
@@ -51,14 +51,14 @@ export class LoginComponent  {
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if(this.password=="p"){
+    if (this.password == "p") {
 
       this.router.navigate(["/product"])
       return
 
     }
 
-    if(this.password=="r"){
+    if (this.password == "r") {
 
       this.router.navigate(["/pos-register"])
       return
@@ -89,24 +89,24 @@ export class LoginComponent  {
 
 
     try {
-      this.loading=true
+      this.loading = true
       this.alertTexto = "";
       this._userService.Login(user).subscribe({
 
         next: (data) => {//validar diferentes estado 2xx
-          const token=data.body
+          const token = data.body
 
-           localStorage.setItem("token",token)
+          localStorage.setItem("token", token)
 
-            this.loading=false
-            //console.log(localStorage.getItem("token"))
-            //alert("Welcome")
-            this.router.navigate(["/dashboard"])
+          this.loading = false
+          //console.log(localStorage.getItem("token"))
+          //alert("Welcome")
+          this.router.navigate(["/dashboard"])
 
 
         },
         error: (err) => {
-          this.loading=false
+          this.loading = false
 
           if (err.status === 401) {
 
@@ -125,7 +125,7 @@ export class LoginComponent  {
       alert("An unexpected error occurred");
       console.error(e);
     }
-      this.loading=false
+    this.loading = false
 
   }
 }

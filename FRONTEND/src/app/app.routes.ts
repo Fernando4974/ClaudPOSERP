@@ -10,19 +10,21 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ProductComponent } from './pages/product/product.component';
 import { NewProductComponent } from './pages/product/new-product/new-product.component';
-import { PosRegisterComponent } from './pages/pos/pos-register/pos-register.component';
+import { PosRegisterComponent } from './pages/pos/pos-version/pos-register/pos-register.component';
+import { PosVersionComponent } from './pages/pos/pos-version/pos-version.component';
 
 export const routes: Routes = [
-  {path:"",redirectTo:'/logIn', pathMatch:'full'},
-  {path:"singIn",component : SingInComponent},
-  {path:"logIn",component : LoginComponent, canDeactivate:[userExitGuard]},
-  {path:"forgotPassword", component: ForgotPasswordComponent},
-  {path:"resetPassword" ,component: ResetPasswordComponent},
-  {path:'product',component:ProductComponent},
-  {path:'newProduct',component:NewProductComponent},
-  {path:"dashboard",component : DashboardComponent, canActivate:[tokenGuard],canDeactivate:[userExitGuard]},
-  {path:"errorPage",component : ErrorpageComponent},
-  {path:"maintenancePage", component: MaintenanceComponent},
-  {path:"pos-register", component: PosRegisterComponent},
-  {path:"**",redirectTo:"/errorPage",pathMatch:'full'},
+  { path: "", redirectTo: '/logIn', pathMatch: 'full' },
+  { path: "singIn", component: SingInComponent },
+  { path: "logIn", component: LoginComponent, canDeactivate: [userExitGuard] },
+  { path: "forgotPassword", component: ForgotPasswordComponent },
+  { path: "resetPassword", component: ResetPasswordComponent },
+  { path: 'product', component: ProductComponent },
+  { path: 'newProduct', component: NewProductComponent },
+  { path: "dashboard", component: DashboardComponent, canActivate: [tokenGuard], canDeactivate: [userExitGuard] },
+  { path: "errorPage", component: ErrorpageComponent },
+  { path: "maintenancePage", component: MaintenanceComponent },
+  { path: "pos-register", component: PosRegisterComponent },
+  {path: "posVersion", component: PosVersionComponent},
+  { path: "**", redirectTo: "/errorPage", pathMatch: 'full' },
 ];

@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   posModule(){
-    this.router.navigate(["/maintenancePage"]);
+    this.router.navigate(["/posVersion"]);
   }
 
   clientModule(){
