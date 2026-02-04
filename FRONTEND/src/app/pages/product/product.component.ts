@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgFor } from '@angular/common';
-import { Product } from '../../interfaces/product';
+import { GetAllProduct } from '../../interfaces/product';
 import { OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
-  listProduct: Product[] = []
+  listProduct: GetAllProduct[] = []
 
 constructor(private productService: ProductService, private router:Router) {
 
@@ -29,8 +29,8 @@ ngOnInit(): void {
   this.getAll();
   }
 
-  getAll() {
-    this.productService.getAllProducts().subscribe({
+   getAll() {
+   this.productService.getAllProducts().subscribe({
       next: (data) => {
         this.listProduct = data
         console.log(this.listProduct)

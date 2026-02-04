@@ -1,150 +1,102 @@
-<!--
-otros estilos -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--  -->
 <app-navbar></app-navbar>
 
-
-
-
-
 <div class="wraper">
-<app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
+
   <div class="body">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form-container">
 
-
-  <div class="product-form-container">
-   <h3 class="title">
-    Nuevo Producto
-   </h3>
-    <header class="form-header d-flex justify-content-between align-items-center mb-4">
-        <div class="title-section d-flex align-items-center">
-            <i class="fa fa-star-o text-muted me-3"></i>
-            <div class="input-group">
-                          <!--  -->
-                          <!-- nameProduct -->
-                          <!--  -->
-                <input [(ngModel)]="nameProduct" type="text" class="form-control form-control-lg form-control-plaintext product-name-input"
-                       placeholder="Escribe el nombre del producto aqui">
-
-            </div>
-
-        </div>
-
-        <div class="image-upload-placeholder">
-            <i class="fa fa-camera-retro fa-3x text-muted"  title="imagen" ></i>
-
-
-
-
-        </div>
-
-
-    </header>
-
-    <div class="form-controls mb-4">
-
-
-
-        <div class="d-flex gap-4">
-            <div class="form-check">
-                  <!--  -->
-                  <!-- posAvalible -->
-                  <!--  -->
-                <input [(ngModel)]="posAvalible" class="form-check-input" type="checkbox" id="checkVendido">
-                <label class="form-check-label" for="checkVendido">
-                    Disponible en punto de venta
-                </label>
-            </div>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkComprar" checked>
-                <label class="form-check-label" for="checkComprar">
-                    Se puede comprar
-                </label>
-            </div> -->
-        </div>
+      <h3 class="title">Nuevo Producto</h3>
+<header class="form-header d-flex justify-content-between align-items-start mb-4">
+  <div class="title-section d-flex align-items-center flex-grow-1">
+    <i class="fa fa-star-o text-muted me-3" style="font-size: 1.5rem;"></i>
+    <div class="input-group">
+      <input
+        formControlName="nameProduct"
+        type="text"
+        class="form-control form-control-lg form-control-plaintext product-name-input"
+        placeholder="Escribe el nombre del producto aqui *">
     </div>
+  </div>
 
-    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button">Información General</button>
-        </li>
-        <!-- <li class="nav-item" role="presentation">
-            <button class="nav-link" id="ventas-tab" data-bs-toggle="tab" data-bs-target="#ventas" type="button">Ventas</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="compra-tab" data-bs-toggle="tab" data-bs-target="#compra" type="button">Compra</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="inventario-tab" data-bs-toggle="tab" data-bs-target="#inventario" type="button">Inventario</button>
-        </li> -->
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contabilidad-tab" data-bs-toggle="tab" data-bs-target="#contabilidad" type="button">Contabilidad</button>
-        </li>
-    </ul>
+  <div class="image-upload-container ms-4">
+    <div class="image-box" (click)="fileInput.click()">
+      @if (!productForm.get('imgProduct')?.value) {
+        <div class="placeholder-wrapper">
+          <img src="camera-icon.png" class="camera-logo" alt="Subir imagen">
+          <div class="plus-circle">
+            <i class="fa fa-plus"></i>
+          </div>
+        </div>
+      } @else {
+        <img [src]="productForm.get('imgProduct')?.value" class="img-preview">
+      }
+      <input #fileInput type="file" (change)="onFileSelected($event)" hidden accept="image/*" formControlName="imgProduct">
+    </div>
+  </div>
+</header>
 
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="general" role="tabpanel">
-            <div class="row">
-                <div class="col-md-6 form-section-left">
-                    <div class="form-group row mb-4 align-items-center">
-                        <label class="col-sm-4 col-form-label field-label">Categoria</label>
-                          <!--  -->
-                          <!-- categorie -->
-                          <!--  -->
-                        <div class="col-sm-8">
-                            <input [(ngModel)]="categorie"  type="text" class="form-control form-control-plaintext field-value" value="">
-                        </div>
-                    </div>
-                    </div>
-                <div class="col-md-6 form-section-left">
-                    <div class="form-group row mb-4 align-items-center">
-                        <label class="col-sm-4 col-form-label field-label">Descripcion</label>
-                        <div class="col-sm-8">
-                          <!--  -->
-                          <!-- descriptionProduct -->
-                          <!--  -->
-                            <input [(ngModel)]="descriptionProduct" type="text" class="form-control form-control-plaintext field-value" value="">
-                        </div>
-                    </div>
-                    </div>
-                       <div class="col-md-6 form-section-left">
-                    <div class="form-group row mb-4 align-items-center">
-                        <label class="col-sm-4 col-form-label field-label">Codigo de barra</label>
-                        <div class="col-sm-8">
-                          <!--  -->
-                          <!-- barcode -->
-                          <!--  -->
-                            <input [(ngModel)]="barcode" type="text" class="form-control form-control-plaintext field-value" value="">
-                        </div>
-                    </div>
-                    </div>
-                <div class="col-md-6 form-section-right">
-                    <div class="form-group row mb-4 align-items-center">
-                        <label class="col-sm-4 col-form-label field-label">Precio de venta</label>
-                        <div class="col-sm-8 d-flex align-items-center">
-                             <span class="me-2">$</span>
-                             <!--  -->
-                             <!-- priceProduct -->
-                             <!--  -->
-                            <input [(ngModel)]="priceProduct" type="text" class="form-control form-control-plaintext field-value-price" value="1,00">
-                             <small class="ms-3 text-muted">(impuestos incluidos)</small>
-                        </div>
-                    </div>
+      <div class="form-controls mb-4">
+        <div class="form-check">
+          <input formControlName="posAvalible" class="form-check-input" type="checkbox" id="checkVendido">
+          <label class="form-check-label field-label" for="checkVendido">
+            Disponible en punto de venta
+          </label>
+        </div>
+      </div>
 
-                  <!--  -->
-                  <!-- boton crear -->
-                  <!--  -->
-                    </div><input  (click)="newProduct()" type="button" class="btn btn-secondary" value="Crear" id="btnCreateProduct">
+      <div class="tab-content" id="myTabContent">
+        <div class="row g-4"> <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Categoría *</label>
+              <input formControlName="categorie" type="text" class="form-control field-value">
+            </div>
+          </div>
 
-                      </div><div class="alert">
-<p id="alertTexto" [(innerHTML)]="alertText"></p>
-<p id="alertTextOK" [(innerHTML)]="alertTextOK"></p>
-</div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Descripción</label>
+              <input formControlName="descriptionProduct" type="text" class="form-control field-value">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Precio de venta *</label>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-0 border-bottom">$</span>
+                <input formControlName="priceProduct" type="text" class="form-control field-value-price w-auto">
+                <small class="ms-2 text-muted align-self-center">(impuestos incluidos)</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Codigo de barras</label>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
+                <input formControlName="barcode" type="text" class="form-control field-value-price w-auto">
+              </div>
+            </div>
+          </div>
 
         </div>
-    </div>
-</div>
-</div>
 
+        <div class="mt-5">
+          <button type="submit" class="btn btn-primary px-4 py-2" [disabled]="productForm.invalid">
+            Crear Producto
+          </button>
+        </div>
 
+        <div class="alert-container mt-3">
+          @if (alertText) {
+            <p id="alertTexto" class="text-danger font-weight-bold">{{ alertText }}</p>
+          }
+          @if (alertTextOK) {
+            <p id="alertTextOK" class="text-success font-weight-bold">{{ alertTextOK }}</p>
+          }
+        </div>
+      </div>
+
+    </form>
+  </div> </div> ```

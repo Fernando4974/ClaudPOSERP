@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product,newProduct } from '../interfaces/product';
+import { GetAllProduct, Product,newProduct } from '../interfaces/product';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 
@@ -16,14 +16,14 @@ export class ProductService {
 
   constructor(private http:HttpClient) {
     this.appUrl=environment.apiUrl
-    this.apiGetAllUrl="api/product/getAll"
-    this.apiNewProductUrl="api/product/register"
+    this.apiGetAllUrl="products/getAll"
+    this.apiNewProductUrl="product/register"
   }
-  getAllProducts():Observable<Product[]>{
+  getAllProducts():Observable<GetAllProduct[]>{
      // const token = localStorage.getItem('token')
      // const headerToken = new HttpHeaders().set('Authorization',`Bearer ${token}`)
      //old manual return mode --> return this.http.get<Product[]>(`${this.appUrl}${this.apiGetAllUrl}`,{headers:headerToken})
-    return this.http.get<Product[]>(`${this.appUrl}${this.apiGetAllUrl}`)
+    return this.http.get<GetAllProduct[]>(`${this.appUrl}${this.apiGetAllUrl}`)
 
   }
   createProduct(newProduct:newProduct):Observable<any>{

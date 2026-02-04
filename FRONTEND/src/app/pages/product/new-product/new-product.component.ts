@@ -1,93 +1,79 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductService } from '../../../services/product.service';
+import { newProduct } from '../../../interfaces/product';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
-import { OnInit } from '@angular/core';
-// import { NgModel } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { newProduct } from '../../../interfaces/product';
-import { ProductService } from '../../../services/product.service';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-new-product',
   standalone: true,
-  imports: [NavbarComponent,SidebarComponent,FormsModule],
+  // IMPORTANTE: Cambiamos FormsModule por ReactiveFormsModule
+  imports: [NavbarComponent, SidebarComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './new-product.component.html',
   styleUrl: './new-product.component.css'
 })
-export class NewProductComponent implements OnInit{
+export class NewProductComponent implements OnInit {
 
-  nameProduct="";
-  priceProduct="";
-  descriptionProduct="";
-  imgProduct="";
-  barcode="";
-  posAvalible:boolean=true;
-  categorie="";
-  alertText="";
-  alertTextOK="";
-  priceProductParced:number=0
+  // Agrupamos todo en un formulario
+  productForm = new FormGroup({
+    nameProduct: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    priceProduct: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
+    descriptionProduct: new FormControl(''),
+    barcode: new FormControl(''),
+    posAvalible: new FormControl(true),
+    categorie: new FormControl('', [Validators.required]),
+    imgProduct: new FormControl('')
+  });
 
+  alertText = "";
+  alertTextOK = "";
 
+  constructor(private _serviceProduct: ProductService) {}
 
-  // vamos aca creando las variables de el formulario new product
+  ngOnInit(): void {}
 
-
-  constructor(private _serviceProduct:ProductService) {
-
-  }
-  ngOnInit(): void {
-
-  }
-
-  newProduct(){
-
-    if (this.nameProduct==""||this.priceProduct==""||this.posAvalible==null||this.categorie=="") {
-        this.alertText="Faltan Campos Obligatorios"
-      return
-
-    }
-    if (!parseFloat(this.priceProduct)) {
-      this.alertText="Error en el Precio"
-      return
+  onSubmit() {
+    if (this.productForm.invalid) {
+      this.alertText = "Por favor, revisa los campos obligatorios.";
+      return;
     }
 
+    // Extraemos los valores directamente del formulario
+    const formValues = this.productForm.value;
 
-    try {
+    const productToSend: newProduct = {
+      nameProduct: formValues.nameProduct!,
+      descriptionProduct: formValues.descriptionProduct || "",
+      barcode: formValues.barcode || "",
+      statusProduct: "1",
+      priceProduct: parseFloat(formValues.priceProduct!),
+      imgProduct: formValues.imgProduct || "",
+      posAvalible: !!formValues.posAvalible,
+      categorie: formValues.categorie!
+    };
 
-      const newProduct:newProduct={
-        nameProduct:this.nameProduct,
-        descriptionProduct:this.descriptionProduct,
-        barcode:this.barcode,
-        statusProduct:"1",
-        priceProduct:parseFloat(this.priceProduct),
-        imgProduct:this.imgProduct,
-        posAvalible:this.posAvalible,
-        categorie:this.categorie
-      }
-      this._serviceProduct.createProduct(newProduct).subscribe({
-
-        next:(data)=>{
-        
-          this.alertTextOK="Producto Creado con Exito"
-            
-        },
-        error:(data)=> {
-          console.log(newProduct)
-            this.alertText="Error al crear el producto"
-
-            console.log("Error al crea el producto");
-            
-            console.log(data)
-        },
-      })
-
-    } catch (error) {
-
-      console.log(error)
-
-    }
-
+    this._serviceProduct.createProduct(productToSend).subscribe({
+      next: () => {
+        this.alertTextOK = "Producto creado con éxito";
+        this.alertText = "";
+        this.productForm.reset({ posAvalible: true }); // Limpia el formulario
+      },
+      error: () => this.alertText = "Error al conectar con el servidor"
+    });
   }
-
-
-
+  onFileSelected(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      // Seteas el valor en el formulario (puedes guardar el base64 o el file)
+      this.productForm.patchValue({
+        imgProduct: reader.result as string
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+}
 }

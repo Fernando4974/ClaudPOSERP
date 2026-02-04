@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
+import { connect } from 'rxjs';
+import { connectToServer } from '../../web-socket/socket-client';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -14,6 +16,8 @@ export class DashboardComponent implements OnInit {
 
   }
   ngOnInit(): void {
+
+   
 
   }
 

@@ -80,7 +80,7 @@
     padding-left: 10px;
 }
 
-.input-display {
+.pantalla-azul {
     grid-column: 2 / 3;
     grid-row: 1;
     background-color: #001a33;
@@ -356,7 +356,7 @@ min-height: max-content;
 width: 96%;
 height: 100%;
 background-color:white;
-color: white;
+color: rgb(0, 0, 0);
 font-size: 1rem;
 font-weight: bold;
 border-radius: 6px;

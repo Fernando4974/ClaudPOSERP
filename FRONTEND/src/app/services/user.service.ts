@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { User, UserLogin } from '../interfaces/user';
 import { Observable } from 'rxjs';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +16,10 @@ export class UserService {
   private APIUrlPasswordReset:string;
   constructor(private readonly http: HttpClient) {
     this.AppUrl=environment.apiUrl;
-    this.APIUrlRegister='api/user/register'
-    this.APIUrlLogin='api/user/login'
-    this.APIUrlReqReset='reqPasswordReset'
-    this.APIUrlPasswordReset='passwordReset'
+    this.APIUrlRegister='auth/register'
+    this.APIUrlLogin='auth/login'
+    this.APIUrlReqReset='auth/password-recovery'
+    this.APIUrlPasswordReset='auth/password-reset'
   }
 
    singIn(user:User):Observable<any>{
@@ -32,9 +31,11 @@ export class UserService {
     return this.http.post(`${this.AppUrl}${this.APIUrlLogin}`,user)
   }
   reqPassword(email:string):Observable<any>{
+    console.log(this.AppUrl,this.APIUrlReqReset)
     return this.http.post(`${this.AppUrl}${this.APIUrlReqReset}`,{email},{observe:'response'})
   }
   resetPassword(data:any):Observable<any>{
-    return this.http.put(`${this.AppUrl}${this.APIUrlPasswordReset}`,data,{observe:'response'})
+    return this.http.patch(`${this.AppUrl}${this.APIUrlPasswordReset}`,data,{observe:'response'})
   }
+
 }

@@ -107,7 +107,7 @@ export class LoginComponent {
         },
         error: (err) => {
           this.loading = false
-
+          console.log(err)
           if (err.status === 401) {
 
             this.alertTexto = "Contraseña Incorrecta"

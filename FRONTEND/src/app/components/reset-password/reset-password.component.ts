@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './reset-password.component.css'
 })
 export class ResetPasswordComponent implements OnInit{
-  
+
   email:string="";emailDisabled:boolean=true;
   alertTexto:string="";
   verifyTexto:string="";
@@ -26,6 +26,7 @@ export class ResetPasswordComponent implements OnInit{
   rPassword:string="";
   buttonDisabled:boolean=false;
   buttonCancelDisabled:boolean=true;
+  token:string=""
 
 
   constructor(private _uservice:UserService, private params:ActivatedRoute, private route:Router) {
@@ -34,22 +35,24 @@ export class ResetPasswordComponent implements OnInit{
   ngOnInit(): void {
      const queryParams = this.params.snapshot.queryParamMap;
 
-     const token= queryParams.get('token') || "";
-     if(token==""){
+     this.token= queryParams.get('token') || "";
+     if(this.token==""){
         alert("No se ha recibido el token, intente nuevamente");
         this.route.navigate(['/login']);
+        return
      }
       this.email=queryParams.get('email') || "";
       if(this.email==""){
         alert("No se ha recibido el email, intente nuevamente");
         this.route.navigate(['/login']);
+        return
       }
   }
-  resetPassword(){  
+  resetPassword(){
 this.alertTexto="";
 this.verifyTexto="";
-    if(this.password.length<6){
-      this.alertTexto="La contraseña debe tener al menos 6 caracteres";
+    if(this.password.length<5){
+      this.alertTexto="La contraseña debe tener al menos 5 caracteres";
       return;
     }
     if(this.password!=this.rPassword){
@@ -67,8 +70,10 @@ this.verifyTexto="";
 
     //service reset password
     this.loading=true;
-    this._uservice.resetPassword({email:this.email,password:this.password}).subscribe({
+    this._uservice.resetPassword({token:this.token,newPassword:this.password}).subscribe({
+
       next:(res)=>{
+         console.log('next')
         this.loading=false;
         this.verifyTexto="Contraseña restablecida con éxito, ya puede iniciar sesión con su nueva contraseña";
       this.buttonDisabled=true;
@@ -79,14 +84,15 @@ this.verifyTexto="";
         if(err.status == 409){
           this.alertTexto="La nueva contraseña no puede ser igual a la anterior";
         }else{
+          console.log(err)
         this.alertTexto="Error al restablecer la contraseña, intente nuevamente";
         }
       }
     });
 
 
- 
-      
+
+
 
 
   }

@@ -16,12 +16,20 @@ export interface ProductFilter{
 export interface newProduct{
 
   nameProduct:string,
-  descriptionProduct:string,
-  barcode:string,
-  statusProduct:string,
   priceProduct:number,
+  descriptionProduct:string,
+  statusProduct:string,
   imgProduct?:string,
+  barcode?:string,
   posAvalible:boolean,
   categorie:string
 
+}
+export interface GetAllProduct{
+  title:string,
+  description:string,
+  barcode?:string,
+  price:number,
+  slug:string,
+  keyNumber?: number
 }

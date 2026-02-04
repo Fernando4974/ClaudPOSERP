@@ -37,6 +37,7 @@ export class SingInComponent implements OnInit {
       this.alertTexto='Datos incompletos';
       return;
     }
+
      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
      if (!emailRegex.test(this.email)) {
       this.alertTexto='Debe ingresar un correo valido'
@@ -50,8 +51,13 @@ export class SingInComponent implements OnInit {
       this.alertTexto="Contraseña debe tener almenos 5 caracteres"
       return
     }
+    const passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/
+    if (!passwordRegex.test(this.password)) {
+      this.alertTexto='La contraseña debe contener Mayuscula, Minuscula, Numero y minimo 6 digitos'
+      return
+    }
     if (this.password !== this.repeatpassword) {
-      alert('Contraseñas no coinciden');
+      this.alertTexto='Contraseñas no coinciden';
       return;
     }
 
@@ -71,8 +77,8 @@ try {
   this._userService.singIn(user).subscribe({
       next: (data)=>{
 
-
-      alert('User: '+ data.msg.userName + ' has been created');
+      console.log(data)
+      alert('User '+ data.user + ' has been created');
       this.router.navigate(['/logIn']);
       },
       error: (err)=>{
@@ -80,7 +86,7 @@ try {
           this.alertTexto="Error, el  correo electronico ingresado ya fue registrado anteriormente"
           return
         }
-
+        console.log(err)
       alert('The user cant be creates by the error' + err)
 }})
 

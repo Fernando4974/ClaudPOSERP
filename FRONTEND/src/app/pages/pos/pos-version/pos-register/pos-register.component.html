@@ -19,16 +19,17 @@
             <p class="message">¡GRACIAS POR SU COMPRA!</p>
         </div>
 
-        <div class="input-display">
-            <p>PLEASE INPUT DATE & TIME. &lt;CA/AMT TEND&gt;</p>
-            <p>:ENTER &lt;SUBTOTAL&gt; :RETURN</p>
-            <div class="date-time-box">
-                <p>DATA</p>
-                <p>MONTH <span>[00]</span></p>
-                <p>YEAR <span>[00]</span></p>
-                <p>TIME (24 HOURS) <span>[00:00]</span></p>
-            </div>
-        </div>
+       <div class="pantalla-azul">
+  <div class="pantalla-azul-content">
+    @if (selectedProduct) {
+      <p class="display-text">PRODUCTO: {{ selectedProduct.title }}</p>
+      <p class="display-text">PRECIO: {{ selectedProduct.price }}</p>
+    } @else {
+      <p class="display-text">ESPERANDO ENTRADA...</p>
+      <p class="display-text small">PRESIONE UN NÚMERO (1-25)</p>
+    }
+  </div>
+</div>
 
         <div class="rotary-switch-container">
             <div class="rotary-switch">
@@ -113,13 +114,18 @@
                 </div>
 
                 <div class="main-keys">
-                    <div class="key-grid">
-                          <button id="Boton_Blanco_5" style= "color: #000;" >5</button><button id="Boton_Blanco_10"  style="color: #000;">10</button><button id="Boton_Blanco_15"  style="color: #000;">15</button><button id="Boton_Blanco_20"  style="color: #000;">20</button><button id="Boton_Blanco_25" style="color: #000;" >25</button>
-                        <button id="Boton_Blanco_4" style= "color: #000;" >4</button><button id="Boton_Blanco_9"  style="color: #000;">9</button><button id="Boton_Blanco_14"  style="color: #000;">14</button><button id="Boton_Blanco_19"  style="color: #000;">19</button><button id="Boton_Blanco_24" style="color: #000;" >24</button>
-                        <button id="Boton_Blanco_3"  style="color: #000;">3</button><button id="Boton_Blanco_8"  style="color: #000;">8</button><button id="Boton_Blanco_13"  style="color: #000;">13</button><button id="Boton_Blanco_18" style="color: #000;">18</button><button id="Boton_Blanco_23"  style="color: #000;">23</button>
-                        <button id="Boton_Blanco_2"  style="color: #000;">2</button><button id="Boton_Blanco_7"  style="color: #000;">7</button><button id="Boton_Blanco_12"  style="color: #000;">12</button><button id="Boton_Blanco_17" style="color: #000;">17</button><button id="Boton_Blanco_22"  style="color: #000;">22</button>
-                        <button id="Boton_Blanco_1"  style="color: #000;">1</button><button id="Boton_Blanco_6"  style="color: #000;">6</button><button id="Boton_Blanco_11"  style="color: #000;">11</button><button id="Boton_Blanco_16" style="color: #000;">16</button><button id="Boton_Blanco_21"  style="color: #000;">21</button>
-                    </div>
+                    <div class="key-grid">@for (num of buttons; track num) {
+    <button
+      type="button"
+      class="btn-pos-white"
+      (click)="onKeyClick(num)">
+
+      <span class="key-number">{{ num }}</span>
+
+   
+    </button>
+  }
+</div>
 
                     <div class="special-keys">
 
