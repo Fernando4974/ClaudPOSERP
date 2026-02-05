@@ -31,5 +31,6 @@ export interface GetAllProduct{
   barcode?:string,
   price:number,
   slug:string,
-  keyNumber?: number
+  keyNumber?: number,
+  count?:number,
 }

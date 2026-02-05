@@ -651,3 +651,47 @@ height: px;;
 }
 
 
+.display-text-title {
+  display: flex;            /* Activa el modo Flexbox */
+  justify-content: space-between; /* Empuja los elementos a los extremos */
+  align-items: center;      /* Alinea verticalmente al centro */
+  width: 100%;             /* Asegura que ocupe todo el ancho disponible */
+  padding: 10px;           /* Espaciado interno opcional */
+
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+.order-list {
+  height: 400px;         /* Ajusta esta altura a tu gusto */
+  overflow-y: auto;      /* Crea el scroll vertical cuando se llena */
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;        /* Importante: evita que los items se aplasten */
+  padding: 5px 0;
+  border-bottom: 1px dashed #eee;
+}
+.order-item {
+  display: flex;
+  align-items: baseline;
+}
+
+.item-name {
+  flex: 1; /* Ocupa todo el espacio posible */
+  display: flex;
+  align-items: baseline;
+}
+
+.item-name::after {
+  content: "";
+  flex: 1;
+  margin: 0 5px;
+  border-bottom: 2px dotted #ccc; /* La línea de puntos automática */
+}

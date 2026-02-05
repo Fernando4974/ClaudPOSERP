@@ -4,32 +4,54 @@
 <div class="body">
 
     <div class="pos-simulation-container">
+      <!-- pantalla recibo -->
         <div class="receipt-area">
-            <h3>Articulo. Can. Precio Unit. Subtotal.</h3>
-            <p>Producto #1 <span>$15.50</span> <span>$15.50</span></p>
-            <p>Producto #2 <span>$4.00</span> <span>$8.00</span></p>
-            <p>Producto C1 <span>$7.25</span> <span>$7.25</span></p>
+            <h6><strong>Articulo. Can. Precio Unit. Subtotal.</strong></h6>
+            @if (showTicket===true) {
+            @for (item of carrito; track $index) {
+            <p>{{item.title}} <span>{{item.count}}</span><span>${{item.price}} &nbsp;</span> {{item.price! * (item.count || 1)}}<span></span></p>
+            }
+
             <hr>
-            <p>SUBTOTAL <span>$30.75</span></p>
-            <p>Impuesto (IVA 16%) <span>$4.92</span></p>
+            <p>SUBTOTAL <span>$&nbsp;{{calcularTotal()}}</span></p>
+            <p>Impuesto (IVA 12%) <span>$&nbsp; {{calcularIva()}}</span></p>
             <hr>
-            <p class="total">TOTAL <span>$35.67</span></p>
-            <p>ConceptoMontoEfectivo Entregado</p>
-            <p>(AMT TEND) $40.00 CAMBIO (RETURN) $4.33</p>
+            <p class="total">TOTAL <span>$&nbsp;{{calcularTotalMasIva()}}</span></p>
+
+
             <p class="message">¡GRACIAS POR SU COMPRA!</p>
+            }
         </div>
 
        <div class="pantalla-azul">
-  <div class="pantalla-azul-content">
-    @if (selectedProduct) {
-      <p class="display-text">PRODUCTO: {{ selectedProduct.title }}</p>
-      <p class="display-text">PRECIO: {{ selectedProduct.price }}</p>
-    } @else {
-      <p class="display-text">ESPERANDO ENTRADA...</p>
-      <p class="display-text small">PRESIONE UN NÚMERO (1-25)</p>
-    }
-  </div>
+
+    <h3>Detalle de Venta</h3>
+    <div class="order-list" #scrollContainer>
+  @for (item of carrito; track $index) {
+    <div class="order-item">
+
+      <span class="item-name">{{ item.title }}</span>
+       <span class="item-count">x {{item.count}}  &nbsp; </span>
+      <span class="item-price">${{ item.price! * (item.count || 1 )}}</span>
+
+    </div>
+  } @empty {
+    <p class="empty-msg">No hay productos seleccionados</p>
+  }
 </div>
+
+    <div class="total-section">
+      <p class="display-text">
+        <span>TOTAL:$</span>
+        <span>{{ calcularTotal() }}</span>
+      </p>
+    </div>
+  </div>
+
+
+
+
+
 
         <div class="rotary-switch-container">
             <div class="rotary-switch">
@@ -72,7 +94,7 @@
                     <button class="orange" id="Boton_Price" style="background-color: #e67e22;">PRICE</button>
                     <button class="orange" id="double" style="height: 123px;" style="background-color: #e67e22;">PLU</button>
                     <button class="orange" id="date">DATE</button>
-                    <button class="red2"id="Boton_C" style="background-color: #a82e2e; display: block; height: 200px;">C</button>
+                    <button class="red2"id="Boton_C"  (click)="deleteLastOne()" style="background-color: #a82e2e; display: block; height: 200px;">C</button>
                 </div>
 
                 <div class="Teclas_arriba">
@@ -122,7 +144,7 @@
 
       <span class="key-number">{{ num }}</span>
 
-   
+
     </button>
   }
 </div>
@@ -144,8 +166,9 @@
                     </div>
 
                     <div class="special-keys3">
-                        <button class="blue" id="subtotal" style="height: 80px; background-color: #6e6b6b;" id="Boton_Subtotal " >SUBTOTAL</button>
-                        <button class="blue" style="height: 120px; background-color:  #1a3c77;" id="Boton_Ca">CA/AMT</button>
+                        <button (click)="imprimirRecibo()" class="blue" id="subtotal" style="height: 80px; background-color: #6e6b6b;" id="Boton_Subtotal " >SUBTOTAL</button>
+                       <!-- Boton total -->
+                        <button  class="blue" style="height: 120px; background-color:  #1a3c77;" id="Boton_Ca">CA/AMT</button>
                     </div>
 
                 </div>
