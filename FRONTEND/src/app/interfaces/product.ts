@@ -13,18 +13,18 @@ export interface ProductFilter{
   barcode?:string,
   status?:string
 }
-export interface newProduct{
-
-  nameProduct:string,
-  priceProduct:number,
-  descriptionProduct:string,
-  statusProduct:string,
-  imgProduct?:string,
-  barcode?:string,
-  posAvalible:boolean,
-  categorie:string,
-  numberKey?:number,
-
+export interface newProduct {
+  title: string;          // Coincide con @IsString()
+  description?: string;   // Coincide con @IsOptional()
+  barcode?: string;
+  price: number;
+  stock: number;
+  slug?: string;
+  tags?: string[];
+  numberKey?: number;
+  posAvalible?: boolean;
+  categorie: string;
+  imgProduct?: string;
 }
 export interface GetAllProduct{
   title:string,
@@ -32,6 +32,6 @@ export interface GetAllProduct{
   barcode?:string,
   price:number,
   slug:string,
-  keyNumber?: number,
+  numberKey?: number,
   count?:number,
 }

@@ -22,9 +22,11 @@ export class NewProductComponent implements OnInit {
     priceProduct: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
     descriptionProduct: new FormControl(''),
     barcode: new FormControl(''),
+    stock: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
     posAvalible: new FormControl(true),
     categorie: new FormControl('', [Validators.required]),
-    imgProduct: new FormControl('')
+    imgProduct: new FormControl(''),
+   numberKey: new FormControl<number | null>(null, [Validators.max(25)]),
   });
 
   alertText = "";
@@ -44,14 +46,15 @@ export class NewProductComponent implements OnInit {
     const formValues = this.productForm.value;
 
     const productToSend: newProduct = {
-      nameProduct: formValues.nameProduct!,
-      descriptionProduct: formValues.descriptionProduct || "",
+      title: formValues.nameProduct!,
+      description: formValues.descriptionProduct || "",
       barcode: formValues.barcode || "",
-      statusProduct: "1",
-      priceProduct: parseFloat(formValues.priceProduct!),
+      price: parseFloat(formValues.priceProduct!),
       imgProduct: formValues.imgProduct || "",
+      stock: formValues.stock ? parseInt(formValues.stock.toString(),10) : 0,
       posAvalible: !!formValues.posAvalible,
-      categorie: formValues.categorie!
+      categorie: formValues.categorie!,
+      numberKey: formValues.numberKey ? parseInt(formValues.numberKey.toString(),10) : 0
     };
 
     this._serviceProduct.createProduct(productToSend).subscribe({

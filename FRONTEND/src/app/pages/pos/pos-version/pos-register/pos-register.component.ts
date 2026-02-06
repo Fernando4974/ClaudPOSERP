@@ -41,6 +41,9 @@ scrollToBottom(): void {
 getAllProducts(){
      this._productService.getAllProducts().subscribe({
       next:(data)=>{
+
+
+
         this.listProduct = data;
          //console.log(this.listProduct)
         this.assignProductsToButtons()
@@ -62,7 +65,7 @@ assignProductsToButtons() {
 
   this.listProduct.forEach((product) => {
     // Extraemos el keyNumber del objeto actual
-    const posicion = product.keyNumber!;
+    const posicion = product.numberKey!;
 
     // Validamos que el keyNumber esté en el rango de tus botones (1 al 25)
     if (posicion >= 1 && posicion <= 25) {

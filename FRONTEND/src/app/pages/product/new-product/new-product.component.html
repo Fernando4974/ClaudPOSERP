@@ -12,7 +12,7 @@
     <i class="fa fa-star-o text-muted me-3" style="font-size: 1.5rem;"></i>
     <div class="input-group">
       <input
-        formControlName="nameProduct"
+        formControlName="title"
         type="text"
         class="form-control form-control-lg form-control-plaintext product-name-input"
         placeholder="Escribe el nombre del producto aqui *">
@@ -56,7 +56,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label class="field-label mb-1">Descripción</label>
-              <input formControlName="descriptionProduct" type="text" class="form-control field-value">
+              <input formControlName="description" type="text" class="form-control field-value">
             </div>
           </div>
 
@@ -65,7 +65,7 @@
               <label class="field-label mb-1">Precio de venta *</label>
               <div class="input-group">
                 <span class="input-group-text bg-transparent border-0 border-bottom">$</span>
-                <input formControlName="priceProduct" type="text" class="form-control field-value-price w-auto">
+                <input formControlName="price" type="text" class="form-control field-value-price w-auto">
                 <small class="ms-2 text-muted align-self-center">(impuestos incluidos)</small>
               </div>
             </div>
@@ -79,8 +79,27 @@
               </div>
             </div>
           </div>
+             <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Tecla de acceso rapido</label>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
+                <input formControlName="numberKey" type="text" class="form-control field-value-price w-auto">
+              </div>
+            </div>
+          </div>
+            </div>
+             <div class="col-md-6">
+            <div class="form-group">
+              <label class="field-label mb-1">Existencias</label>
+              <div class="input-group">
+                <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
+                <input formControlName="stock" type="text" class="form-control field-value-price w-auto">
+              </div>
+            </div>
+          </div>
 
-        </div>
+       
 
         <div class="mt-5">
           <button type="submit" class="btn btn-primary px-4 py-2" [disabled]="productForm.invalid">
