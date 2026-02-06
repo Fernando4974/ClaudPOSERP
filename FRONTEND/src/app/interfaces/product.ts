@@ -22,7 +22,8 @@ export interface newProduct{
   imgProduct?:string,
   barcode?:string,
   posAvalible:boolean,
-  categorie:string
+  categorie:string,
+  numberKey?:number,
 
 }
 export interface GetAllProduct{
