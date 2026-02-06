@@ -14,8 +14,8 @@ export interface ProductFilter{
   status?:string
 }
 export interface newProduct {
-  title: string;          // Coincide con @IsString()
-  description?: string;   // Coincide con @IsOptional()
+  title: string;
+  description?: string;   
   barcode?: string;
   price: number;
   stock: number;

@@ -17,7 +17,7 @@ export class ProductService {
   constructor(private http:HttpClient) {
     this.appUrl=environment.apiUrl
     this.apiGetAllUrl="products/getAll"
-    this.apiNewProductUrl="product/register"
+    this.apiNewProductUrl="products/create"
   }
   getAllProducts():Observable<GetAllProduct[]>{
      // const token = localStorage.getItem('token')

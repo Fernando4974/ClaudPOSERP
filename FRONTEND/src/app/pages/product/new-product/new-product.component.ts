@@ -18,15 +18,15 @@ export class NewProductComponent implements OnInit {
 
   // Agrupamos todo en un formulario
   productForm = new FormGroup({
-    nameProduct: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    priceProduct: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
-    descriptionProduct: new FormControl(''),
+    title: new FormControl('', [ Validators.required, Validators.minLength(3)]),
+    price: new FormControl('', [ Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
+    description: new FormControl(''),
     barcode: new FormControl(''),
-    stock: new FormControl('', [Validators.required, Validators.pattern(/^\d+(\.\d+)?$/)]),
+    stock: new FormControl('', [ Validators.pattern(/^\d+(\.\d+)?$/)]),
     posAvalible: new FormControl(true),
-    categorie: new FormControl('', [Validators.required]),
+    categorie: new FormControl(''),
     imgProduct: new FormControl(''),
-   numberKey: new FormControl<number | null>(null, [Validators.max(25)]),
+    numberKey: new FormControl<number | null>(null, [ Validators.max(25)]),
   });
 
   alertText = "";
@@ -46,11 +46,11 @@ export class NewProductComponent implements OnInit {
     const formValues = this.productForm.value;
 
     const productToSend: newProduct = {
-      title: formValues.nameProduct!,
-      description: formValues.descriptionProduct || "",
+      title: formValues.title!,
+      description: formValues.description || "",
       barcode: formValues.barcode || "",
-      price: parseFloat(formValues.priceProduct!),
-      imgProduct: formValues.imgProduct || "",
+      price: parseFloat(formValues.price!),
+      //imgProduct: formValues.imgProduct || "",
       stock: formValues.stock ? parseInt(formValues.stock.toString(),10) : 0,
       posAvalible: !!formValues.posAvalible,
       categorie: formValues.categorie!,
@@ -63,7 +63,10 @@ export class NewProductComponent implements OnInit {
         this.alertText = "";
         this.productForm.reset({ posAvalible: true }); // Limpia el formulario
       },
-      error: () => this.alertText = "Error al conectar con el servidor"
+      error: (err) => {this.alertText = "Error al conectar con el servidor",
+      console.log(err);
+    }
+
     });
   }
   onFileSelected(event: any) {

@@ -7,34 +7,33 @@
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form-container">
 
       <h3 class="title">Nuevo Producto</h3>
-<header class="form-header d-flex justify-content-between align-items-start mb-4">
-  <div class="title-section d-flex align-items-center flex-grow-1">
-    <i class="fa fa-star-o text-muted me-3" style="font-size: 1.5rem;"></i>
-    <div class="input-group">
-      <input
-        formControlName="title"
-        type="text"
-        class="form-control form-control-lg form-control-plaintext product-name-input"
-        placeholder="Escribe el nombre del producto aqui *">
-    </div>
-  </div>
-
-  <div class="image-upload-container ms-4">
-    <div class="image-box" (click)="fileInput.click()">
-      @if (!productForm.get('imgProduct')?.value) {
-        <div class="placeholder-wrapper">
-          <img src="camera-icon.png" class="camera-logo" alt="Subir imagen">
-          <div class="plus-circle">
-            <i class="fa fa-plus"></i>
+      <header class="form-header d-flex justify-content-between align-items-start mb-4">
+        <div class="title-section d-flex align-items-center flex-grow-1">
+          <i class="fa fa-star-o text-muted me-3" style="font-size: 1.5rem;"></i>
+          <div class="input-group">
+            <input formControlName="title" type="text"
+              class="form-control form-control-lg form-control-plaintext product-name-input"
+              placeholder="Escribe el nombre del producto aqui *">
           </div>
         </div>
-      } @else {
-        <img [src]="productForm.get('imgProduct')?.value" class="img-preview">
-      }
-      <input #fileInput type="file" (change)="onFileSelected($event)" hidden accept="image/*" formControlName="imgProduct">
-    </div>
-  </div>
-</header>
+
+        <div class="image-upload-container ms-4">
+          <div class="image-box" (click)="fileInput.click()">
+            @if (!productForm.get('imgProduct')?.value) {
+            <div class="placeholder-wrapper">
+              <img src="camera-icon.png" class="camera-logo" alt="Subir imagen">
+              <div class="plus-circle">
+                <i class="fa fa-plus"></i>
+              </div>
+            </div>
+            } @else {
+            <img [src]="productForm.get('imgProduct')?.value" class="img-preview">
+            }
+            <input #fileInput type="file" (change)="onFileSelected($event)" hidden accept="image/*"
+              formControlName="imgProduct">
+          </div>
+        </div>
+      </header>
 
       <div class="form-controls mb-4">
         <div class="form-check">
@@ -46,7 +45,8 @@
       </div>
 
       <div class="tab-content" id="myTabContent">
-        <div class="row g-4"> <div class="col-md-6">
+        <div class="row g-4">
+          <div class="col-md-6">
             <div class="form-group">
               <label class="field-label mb-1">Categoría *</label>
               <input formControlName="categorie" type="text" class="form-control field-value">
@@ -79,27 +79,30 @@
               </div>
             </div>
           </div>
-             <div class="col-md-6">
-            <div class="form-group">
-              <label class="field-label mb-1">Tecla de acceso rapido</label>
-              <div class="input-group">
-                <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
-                <input formControlName="numberKey" type="text" class="form-control field-value-price w-auto">
-              </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="field-label mb-1">Tecla de acceso rapido</label>
+            <div class="input-group">
+              <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
+              <input formControlName="numberKey" type="text" class="form-control field-value-price w-auto">
             </div>
           </div>
-            </div>
-             <div class="col-md-6">
-            <div class="form-group">
-              <label class="field-label mb-1">Existencias</label>
-              <div class="input-group">
-                <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
-                <input formControlName="stock" type="text" class="form-control field-value-price w-auto">
-              </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="field-label mb-1">Existencias</label>
+            <div class="input-group">
+              <span class="input-group-text bg-transparent border-0 border-bottom">#</span>
+              <input formControlName="stock" type="text" class="form-control field-value-price w-auto">
             </div>
           </div>
+        </div>
 
-       
+
+
+
+
 
         <div class="mt-5">
           <button type="submit" class="btn btn-primary px-4 py-2" [disabled]="productForm.invalid">
@@ -109,13 +112,14 @@
 
         <div class="alert-container mt-3">
           @if (alertText) {
-            <p id="alertTexto" class="text-danger font-weight-bold">{{ alertText }}</p>
+          <p id="alertTexto" class="text-danger font-weight-bold">{{ alertText }}</p>
           }
           @if (alertTextOK) {
-            <p id="alertTextOK" class="text-success font-weight-bold">{{ alertTextOK }}</p>
+          <p id="alertTextOK" class="text-success font-weight-bold">{{ alertTextOK }}</p>
           }
         </div>
       </div>
 
     </form>
-  </div> </div> ```
+  </div>
+</div> 

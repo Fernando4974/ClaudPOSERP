@@ -94,7 +94,8 @@ export class LoginComponent {
       this._userService.Login(user).subscribe({
 
         next: (data) => {//validar diferentes estado 2xx
-          const token = data.body
+          console.log(data)
+          const token = data.token
 
           localStorage.setItem("token", token)
 
