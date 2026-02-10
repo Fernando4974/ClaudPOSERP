@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-maintenance',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './maintenance.component.css'
 })
 export class MaintenanceComponent {
+  constructor(private location: Location){}
+  comeBack(): void{
+    this.location.back()
+  }
 
 }

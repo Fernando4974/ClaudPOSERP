@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { Route, Router } from '@angular/router';
+import { SidebarComponent } from '../../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-pos-version',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, SidebarComponent],
   templateUrl: './pos-version.component.html',
   styleUrl: './pos-version.component.css'
 })

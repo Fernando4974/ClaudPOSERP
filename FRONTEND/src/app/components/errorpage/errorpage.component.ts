@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-errorpage',
   standalone: true,
@@ -8,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './errorpage.component.css'
 })
 export class ErrorpageComponent {
+  constructor(private location: Location){}
+
+  comeBack():void{
+    this.location.back();
+
+  }
+
 
 }

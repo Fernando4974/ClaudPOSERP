@@ -9,8 +9,18 @@ import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors } fr
 import { UserService } from './services/user.service';
 import { CommonModule } from '@angular/common';
 import { tokenInterceptor } from './utils/token.interceptor';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),provideHttpClient(withInterceptors([tokenInterceptor])),UserService,CommonModule,]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor])),
+    provideHttpClient(
+      withInterceptors([authInterceptor])),
+    UserService,
+    CommonModule,
+  ]
 
 };

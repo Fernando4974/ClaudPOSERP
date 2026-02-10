@@ -1,23 +1,28 @@
-.body {
+/* Quitamos el punto de .body porque es una etiqueta, no una clase */
+body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center; /* Centra los módulos horizontalmente */
-    align-items: flex-start; /* Alinea los módulos al inicio del viewport verticalmente */
-    min-height: 100vh;
     margin: 0;
-    padding-top: 200px; /* Espacio superior para que no esté pegado */
-    background-color: #f4f4f9; /* Un color de fondo suave */
+    background-color: #f4f4f9;
+    min-height: 100vh;
 }
-#casio{
-  max-width: 60px;
+
+/* Este es el contenedor mágico */
+.main-layout {
+    display: flex; /* Alinea hijos (sidebar y container) en fila */
+    align-items: flex-start;
 }
 
 .module-container {
-  margin-top: 160px;
+    flex-grow: 1; /* Hace que el contenedor ocupe el resto del espacio */
     display: flex;
-    gap: 30px; /* Espacio entre los módulos */
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
-    justify-content: center; /* Centra los elementos dentro del contenedor */
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra los cuadritos dentro de su espacio */
+    padding-top: 170px; /* Ajusta según el alto de tu navbar */
+}
+
+#casio {
+    max-width: 60px;
 }
 
 .module-item {
@@ -25,27 +30,30 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 180px; /* Ancho fijo para cada módulo */
+    width: 180px;
 }
 
 .module-icon {
-    /* Estilo del recuadro blanco alrededor del icono */
     background-color: #ffffff;
-    border-radius: 12px; /* Esquinas ligeramente redondeadas */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra suave */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     width: 120px;
     height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px; /* Espacio entre el icono y la etiqueta */
-
-    /* Estilo del icono (Placeholder usando un emoji) */
+    margin-bottom: 10px;
     font-size: 40px;
+    cursor: pointer; /* Para que parezca clickeable */
+    transition: transform 0.2s;
+}
+
+.module-icon:hover {
+    transform: scale(1.05); /* Efecto visual al pasar el mouse */
 }
 
 .module-label {
     font-size: 17px;
     color: #333;
-    font-weight: 600; /* Texto ligeramente más grueso */
+    font-weight: 600;
 }

@@ -12,7 +12,8 @@ import { ProductComponent } from './pages/product/product.component';
 import { NewProductComponent } from './pages/product/new-product/new-product.component';
 import { PosRegisterComponent } from './pages/pos/pos-version/pos-register/pos-register.component';
 import { PosVersionComponent } from './pages/pos/pos-version/pos-version.component';
-
+import { UpdateProductComponent } from './pages/product/update-product/update-product.component';
+const param: string = '';
 export const routes: Routes = [
   { path: "", redirectTo: '/logIn', pathMatch: 'full' },
   { path: "singIn", component: SingInComponent },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: "errorPage", component: ErrorpageComponent },
   { path: "maintenancePage", component: MaintenanceComponent },
   { path: "pos-register", component: PosRegisterComponent },
-  {path: "posVersion", component: PosVersionComponent},
+  { path: "posVersion", component: PosVersionComponent },
+  { path: "updateProduct/:id", component: UpdateProductComponent },
   { path: "**", redirectTo: "/errorPage", pathMatch: 'full' },
 ];
